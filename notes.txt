@@ -1,0 +1,7 @@
+zeroitp@gmail.com
+Th1chtumflum
+
+Cài umbraco 15
+dotnet add package Clean 5.0.0
+
+vô trang admin > packages > run pending migration
