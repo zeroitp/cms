@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" class="loading">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +7,19 @@
     <meta name="description" content="Sun Casa Central - Khu đô thị kiểu mẫu đậm phong cách Singapore tại trung tâm VSIP II, Bình Dương">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+      .section-title {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        will-change: opacity, transform;
+      }
+      .section-title.animated {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
     <!-- Facebook Pixel Code -->
     <script>
         !function(f,b,e,v,n,t,s)
@@ -32,23 +43,54 @@
     </script>
 </head>
 <body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <img src="assets/logo/LOGO-SUN-CASA-CENTRAL.png" alt="Loading..." style="width: 100px;">
+    </div>
+
+    <div class="main-wrapper">
     <!-- Header Section -->
     <header class="header">
         <div class="container">
-            <div class="header-content">
+            <!-- Desktop Header -->
+            <div class="header-content desktop-header">
                 <div class="logo">
                     <img src="assets/logo/LOGO-SUN-CASA-CENTRAL.png" alt="Sun Casa Central Logo">
                 </div>
                 <nav class="main-nav">
                     <ul>
-                        <li><a href="#banner">Trang chủ</a></li>
-                        <li><a href="#project-intro">Tổng quan</a></li>
-                        <li><a href="#location">Vị trí</a></li>
-                        <li><a href="#amenities">Tiện ích</a></li>
-                        <li><a href="#products">Sản phẩm</a></li>
-                        <li><a href="#gallery">Thực tế</a></li>
-                        <li><a href="#policy">Chính sách</a></li>
-                        <li><a href="#contact-form-box">Liên hệ</a></li>
+                        <li><a href="#banner">Trang Chủ</a></li>
+                        <li><a href="#project-intro">Tổng Quan</a></li>
+                        <li><a href="#location">Vị Trí</a></li>
+                        <li><a href="#amenities">Tiện Ích</a></li>
+                        <li><a href="#products">Sản Phẩm</a></li>
+                        <li><a href="#gallery">Thư Viện</a></li>
+                        <li><a href="#policy">Chính Sách</a></li>
+                        <li><a href="#contact-form-box">Liên Hệ</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Mobile Header -->
+            <div class="header-content mobile-header">
+                <div class="logo-img">
+                    <img src="assets/logo/LOGO-SUN-CASA-CENTRAL.png" alt="Sun Casa Central Logo">
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <nav class="mobile-nav">
+                    <ul>
+                        <li><a href="#banner">Trang Chủ</a></li>
+                        <li><a href="#project-intro">Tổng Quan</a></li>
+                        <li><a href="#location">Vị Trí</a></li>
+                        <li><a href="#amenities">Tiện Ích</a></li>
+                        <li><a href="#products">Sản Phẩm</a></li>
+                        <li><a href="#gallery">Thư Viện</a></li>
+                        <li><a href="#policy">Chính Sách</a></li>
+                        <li><a href="#contact-form-box">Liên Hệ</a></li>
                     </ul>
                 </nav>
             </div>
@@ -59,10 +101,7 @@
     <section id="banner" class="banner">
         <div class="banner-video-wrapper">
             <video class="banner-video" src="assets/album/banner.mp4" autoplay loop muted playsinline></video>
-            <!-- <div class="banner-title-overlay">
-                <h1>Sun Casa Central – Tâm điểm sống đẳng cấp giữa lòng VSIP II</h1>
-                <p class="caption">Khu đô thị kiểu mẫu đậm phong cách Singapore</p>
-            </div> !-->
+                <!-- <div class="banner-overlay"></div> -->
         </div>
     </section>
 
@@ -70,36 +109,48 @@
     <section id="project-intro" class="project-intro">
         <div class="container">
             <div class="content">
-                <p>Được phát triển bởi VSIP Group, Sun Casa Central vị trí đẳng cấp kết nối trực tiếp với Vành Đai 4, cao tốc Chơn Thành-Thủ Dầu Một-Thủ Đức, hoà mình cùng không gian xanh mát hơn 60% mảng xanh đậm chất Singapore ngay tại Trung tâm hành chính tỉnh Bình Dương</p>
-                <div class="project-info project-info-modern">
-                    <div class="project-info-item-modern info1">
-                        <div class="icon"><i class="fas fa-user-tie"></i></div>
+                    <p class="intro-text">Được phát triển bởi VSIP Group, Sun Casa Central vị trí đẳng cấp kết nối trực tiếp với Vành Đai 4, cao tốc Chơn Thành-Thủ Dầu Một-Thủ Đức, hoà mình cùng không gian xanh mát hơn 60% mảng xanh đậm chất Singapore ngay tại Trung tâm hành chính tỉnh Bình Dương</p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="feature-image">
+                                <img src="https://images.unsplash.com/photo-1577495508326-19a1b3cf65b7?w=800" alt="Chủ đầu tư">
+                            </div>
                         <h3>Chủ đầu tư</h3>
                         <p>VSIP – Liên doanh Singapore – Việt Nam</p>
                     </div>
-                    <div class="project-info-item-modern info2">
-                        <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+
+                        <div class="feature-item">
+                            <div class="feature-image">
+                                <img src="https://images.unsplash.com/photo-1506816561089-5cc37b3aa9b0?w=800" alt="Vị trí">
+                            </div>
                         <h3>Vị trí</h3>
                         <p>Trung tâm khu công nghiệp VSIP II – TP. Tân Uyên, Bình Dương</p>
                     </div>
-                    <div class="project-info-item-modern info3">
-                        <div class="icon"><i class="fas fa-home"></i></div>
+
+                        <div class="feature-item">
+                            <div class="feature-image">
+                                <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800" alt="Loại hình">
+                            </div>
                         <h3>Loại hình</h3>
                         <p>Nhà phố, shophouse, biệt thự song lập, biệt thự đơn lập, shop villa</p>
                     </div>
-                    <div class="project-info-item-modern info4">
-                        <div class="icon"><i class="fas fa-ruler-combined"></i></div>
+
+                        <div class="feature-item">
+                            <div class="feature-image">
+                                <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800" alt="Quy mô">
+                            </div>
                         <h3>Quy mô</h3>
                         <p>30 HA, tổng 879 sản phẩm, diện tích từ 100–250m²</p>
                     </div>
-                    <div class="project-info-item-modern info5">
-                        <div class="icon"><i class="fas fa-file-signature"></i></div>
+
+                        <div class="feature-item">
+                            <div class="feature-image">
+                                <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800" alt="Pháp lý">
+                            </div>
                         <h3>Pháp lý</h3>
                         <p>Sổ hồng riêng, sở hữu lâu dài</p>
                     </div>
-                </div>
-                <div class="project-image">
-                    <img src="assets/logo/BANG THONG TIN DU AN.png" alt="Thông tin dự án">
                 </div>
             </div>
         </div>
@@ -108,19 +159,35 @@
     <!-- Location Section -->
     <section id="location" class="location">
         <div class="container">
-            <h2>Vị trí vàng tại trung tâm thứ 2 TP.HCM</h2>
-            <div class="map-container">
-                <div id="map"></div>
+                <h2 class="section-title">Vị Trí Vàng<em>Tại Trung Tâm Thứ 2 TP.HCM</em></h2>
+                <p class="section-description">Sun Casa Central tọa lạc tại vị trí đắc địa ngay trung tâm thành phố Bến Cát, nằm trong khu vực phát triển năng động với nhiều tiện ích xung quanh</p>
             </div>
-            <div class="location-info">
-                <p>Sun Casa Central – tâm điểm của siêu TP.HCM mới sau sáp nhập, nơi có hạ tầng giao thông hoàn chỉnh và tiếp giáp nhiều khu công nghiệp lớn với tốc độ phát triển nhanh chóng cùng hơn 2000 lao động chuyên môn cao.</p>
-                <ul class="location-features">
-                    <li>Kết nối trực tiếp đường Vành Đai 4, cao tốc Chơn Thành-Thủ Dầu Một-Thủ Đức</li>
-                    <li>Trung tâm VSIP II – Khu công nghiệp năng động bậc nhất</li>
-                    <li>5 phút đến AEON Mall, KCN Đại Đăng, trường học liên cấp quốc tế GreenField School</li>
-                    <li>7 phút đến trung tâm hành chính tỉnh Bình Dương</li>
-                    <li>Kết nối nhanh về Quốc lộ 13, đường Mỹ Phước – Tân Vạn</li>
-                </ul>
+            <div class="location-content">
+                <div class="location-left">
+                    <ul class="amenities-list">
+                        <li class="amenities-item">
+                            <i class="fas fa-industry"></i>
+                            <span>Liền Kề KCN VSIP II Và VSIP III</span>
+                        </li>
+                        <li class="amenities-item">
+                            <i class="fas fa-road"></i>
+                            <span>Kết Nối Thuận Tiện Với TP.HCM, Thủ Dầu Một Và Lân Cận</span>
+                        </li>
+                        <li class="amenities-item">
+                            <i class="fas fa-building"></i>
+                            <span>Gần Trường Học, Bệnh Viện, Trung Tâm Thương Mại</span>
+                        </li>
+                        <li class="amenities-item">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Thuộc Khu Vực Phát Triển Mạnh Về Hạ Tầng Và Kinh Tế</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="location-right">
+                    <div class="location-map">
+                        <img src="assets/vi-tri/vi-tri.jpg" alt="Vị trí dự án Sun Casa Central tại trung tâm TP. Bến Cát">
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -128,34 +195,84 @@
     <!-- Amenities Section -->
     <section id="amenities" class="amenities">
         <div class="container">
-            <h2>Chuẩn sống Singapore – Đô thị xanh giữa khu công nghệ cao VSIP năng động</h2>
-            <p>Với định hướng phát triển xanh, thông minh và bền vững, VSIP tiếp tục đầu tư mạnh hạ tầng tiện ích chất lượng, nhằm kiến tạo dự án Sun Casa Central trở thành một khu đô thị "all-in-one" đầy đủ tiện nghi:</p>
+                <h2 class="section-title">Chuẩn Sống Singapore<em>Đô Thị Xanh Giữa Khu Công Nghệ Cao VSIP Năng Động</em></h2>
+                <p class="section-description">Với định hướng phát triển xanh, thông minh và bền vững, VSIP tiếp tục đầu tư mạnh hạ tầng tiện ích chất lượng, nhằm kiến tạo dự án Sun Casa Central trở thành một khu đô thị "all-in-one" đầy đủ tiện nghi.</p>
             
-            <div class="tabs">
+                <div class="amenities-tabs">
                 <div class="tab-buttons">
-                    <button class="tab-btn active" data-tab="internal">Nội khu</button>
-                    <button class="tab-btn" data-tab="external">Ngoại khu</button>
+                        <button class="tab-btn active" data-tab="internal">
+                            <i class="fas fa-home"></i>
+                            <span>Tiện ích nội khu</span>
+                        </button>
+                        <button class="tab-btn" data-tab="external">
+                            <i class="fas fa-city"></i>
+                            <span>Tiện ích ngoại khu</span>
+                        </button>
                 </div>
                 
                 <div class="tab-content">
                     <div class="tab-pane active" id="internal">
-                        <div class="amenities-list">
-                            <div class="amenities-item"><i class="fas fa-check-circle"></i> Mật độ cây xanh hơn tổng 60% toàn bộ khu đô thị</div>
-                            <div class="amenities-item"><i class="fas fa-check-circle"></i> Tổ hợp thể thao The Sun Sports Center tiêu chuẩn Edge châu Âu: sân tennis mái vòm, sân cầu lông, hồ bơi chuẩn quốc tế, phòng gym tiện nghi hiện đại</div>
-                            <div class="amenities-item"><i class="fas fa-check-circle"></i> Công viên bờ suối, công viên trung tâm</div>
-                            <div class="amenities-item"><i class="fas fa-check-circle"></i> Tổ hợp thương mại dịch vụ 5,2 HA</div>
+                            <div class="amenities-grid">
+                                <div class="amenity-card">
+                                    <div class="amenity-icon">
+                                        <i class="fas fa-tree"></i>
+                                    </div>
+                                    <h3>Không gian xanh</h3>
+                                    <p>Hơn 60% diện tích được phủ xanh, tạo môi trường sống trong lành và gần gũi với thiên nhiên</p>
+                                </div>
+                                <div class="amenity-card">
+                                    <div class="amenity-icon">
+                                        <i class="fas fa-swimming-pool"></i>
+                                    </div>
+                                    <h3>The Sun Sports Center</h3>
+                                    <p>Trung tâm thể thao đẳng cấp với hồ bơi chuẩn Olympic, sân tennis, phòng gym hiện đại</p>
+                                </div>
+                                <div class="amenity-card">
+                                    <div class="amenity-icon">
+                                        <i class="fas fa-umbrella-beach"></i>
+                                    </div>
+                                    <h3>Công viên trung tâm</h3>
+                                    <p>Không gian xanh mát với đài phun nước, khu vui chơi trẻ em và đường dạo bộ</p>
+                                </div>
+                                <div class="amenity-card">
+                                    <div class="amenity-icon">
+                                        <i class="fas fa-store"></i>
+                                    </div>
+                                    <h3>Khu thương mại</h3>
+                                    <p>Tổ hợp thương mại dịch vụ 5.2 HA đáp ứng mọi nhu cầu mua sắm, giải trí</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="tab-pane" id="external">
-                        <div class="amenities-list">
-                            <div class="amenities-item"><i class="fas fa-check-circle"></i> TTTM The Sun Mall 3ha với 110 gian hàng thương mại (chưa có)</div>
-                            <div class="amenities-item"><i class="fas fa-check-circle"></i> Phòng khám đa khoa tiêu chuẩn quốc tế 5.000m2 với hơn 150 giường bệnh (đang xây dựng)</div>
-                            <div class="amenities-item"><i class="fas fa-check-circle"></i> Trường mầm non Vườn Trẻ Thơ 3,000m2, công suất hơn 400 trẻ</div>
-                            <div class="amenities-item"><i class="fas fa-check-circle"></i> The Sun Containers Night Market: chợ đêm, ẩm thực, chương trình nghệ thuật biểu diễn hàng đêm</div>
-                            <div class="amenities-item"><i class="fas fa-check-circle"></i> Siêu thị Aeon Sora Bình Dương</div>
-                            <div class="amenities-item"><i class="fas fa-check-circle"></i> Siêu thị điện máy xanh, thế giới di động, bách hoá xanh</div>
-                            <div class="amenities-item"><i class="fas fa-check-circle"></i> Chợ Vĩnh Tân</div>
-                            <div class="amenities-item"><i class="fas fa-check-circle"></i> Đại công viên trung tâm The Sun Park 4ha: Đài phun nước laser nghệ thuật Singapore, đường chạy bộ, quảng trường trung tâm</div>
+                        <div class="tab-pane" id="external">
+                            <div class="amenities-grid">
+                                <div class="amenity-card">
+                                    <div class="amenity-icon">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </div>
+                                    <h3>The Sun Mall</h3>
+                                    <p>Trung tâm thương mại 3ha với 110 gian hàng đa dạng, phục vụ mọi nhu cầu</p>
+                                </div>
+                                <div class="amenity-card">
+                                    <div class="amenity-icon">
+                                        <i class="fas fa-hospital"></i>
+                                    </div>
+                                    <h3>Y tế quốc tế</h3>
+                                    <p>Phòng khám đa khoa tiêu chuẩn quốc tế với hơn 150 giường bệnh</p>
+                                </div>
+                                <div class="amenity-card">
+                                    <div class="amenity-icon">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <h3>Giáo dục toàn diện</h3>
+                                    <p>Hệ thống trường học từ mầm non đến THPT, đạt chuẩn quốc tế</p>
+                                </div>
+                                <div class="amenity-card">
+                                    <div class="amenity-icon">
+                                        <i class="fas fa-utensils"></i>
+                                    </div>
+                                    <h3>Night Market</h3>
+                                    <p>Chợ đêm container độc đáo với ẩm thực đa dạng và các chương trình nghệ thuật</p>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -166,58 +283,347 @@
     <!-- Products Section -->
     <section id="products" class="products">
         <div class="container">
-            <h2>Loại hình sản phẩm</h2>
-            <p>Được tư vấn, thiết kế bởi đơn vị danh tiếng Singapore, Sun Casa Central đạt giải nhất "Dự án nhà ở thấp tầng có quy hoạch tổng thể tốt nhất" (Best Housing Master Plan Design) - Dot Property Awards 2020</p>
-            <p>Quy mô: 879 sản phẩm đa dạng trên diện tích 30 Ha</p>
+            <h2 class="section-title">Sản Phẩm Đẳng Cấp<em>Thiết Kế Singapore</em></h2>
+            <p class="section-description">Được tư vấn, thiết kế bởi đơn vị danh tiếng Singapore, Sun Casa Central đạt giải nhất "Dự án nhà ở thấp tầng có quy hoạch tổng thể tốt nhất" (Best Housing Master Plan Design) - Dot Property Awards 2020</p>
             
-            <div class="product-multislider">
-                <button class="multi-arrow left"><i class="fas fa-chevron-left"></i></button>
-                <div class="multi-track">
-                    <div class="multi-slide">
-                        <img src="assets/loai-hinh/Nhà phố 2 tầng.jpg" alt="Nhà Phố Liền Kề loại 1">
-                        <div class="multi-caption">Nhà Phố Liền Kề loại 1</div>
+            <!-- Splide -->
+            <div class="splide productSplide">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <li class="splide__slide">
+                            <img src="assets/loai-hinh/Nhà phố 2 tầng.jpg" alt="Nhà Phố Liền Kề loại 1">
+                            <div class="slide-caption">Nhà Phố Liền Kề loại 1</div>
+                        </li>
+                        <li class="splide__slide">
+                            <img src="assets/loai-hinh/Nhà phố 3 tầng.jpg" alt="Nhà Phố Liền Kề loại 2">
+                            <div class="slide-caption">Nhà Phố Liền Kề loại 2</div>
+                        </li>
+                        <li class="splide__slide">
+                            <img src="assets/loai-hinh/Shophouse.jpg" alt="Shophouse">
+                            <div class="slide-caption">Shophouse</div>
+                        </li>
+                        <li class="splide__slide">
+                            <img src="assets/loai-hinh/Shop Villa.png" alt="Shop Villa">
+                            <div class="slide-caption">Shop Villa</div>
+                        </li>
+                        <li class="splide__slide">
+                            <img src="assets/loai-hinh/Biệt thự đơn lập.png" alt="Biệt Thự Đơn Lập">
+                            <div class="slide-caption">Biệt Thự Đơn Lập</div>
+                        </li>
+                        <li class="splide__slide">
+                            <img src="assets/loai-hinh/Biệt thự song lập.png" alt="Biệt Thự Song Lập">
+                            <div class="slide-caption">Biệt Thự Song Lập</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="product-info">
+                <div class="product-overview">
+                    <h3>Quy mô dự án</h3>
+                </div>
+                
+                <div class="product-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-city"></i>
+                        <span>879 sản phẩm đa dạng trên diện tích 30 Ha</span>
                     </div>
-                    <div class="multi-slide">
-                        <img src="assets/loai-hinh/Nhà phố 3 tầng.jpg" alt="Nhà Phố Liền Kề loại 2">
-                        <div class="multi-caption">Nhà Phố Liền Kề loại 2</div>
+                    <div class="spec-item">
+                        <i class="fas fa-ruler-combined"></i>
+                        <span>Diện tích: từ 100 – 250m²</span>
                     </div>
-                    <div class="multi-slide">
-                        <img src="assets/loai-hinh/Shophouse.jpg" alt="Nhà Phố Thương Mại (Shophouse)">
-                        <div class="multi-caption">Nhà Phố Thương Mại (Shophouse)</div>
-                    </div>
-                    <div class="multi-slide">
-                        <img src="assets/loai-hinh/Biệt thự đơn lập.png" alt="Biệt Thự Đơn Lập">
-                        <div class="multi-caption">Biệt Thự Đơn Lập</div>
-                    </div>
-                    <div class="multi-slide">
-                        <img src="assets/loai-hinh/Biệt thự song lập.png" alt="Biệt Thự Song Lập">
-                        <div class="multi-caption">Biệt Thự Song Lập</div>
+                    <div class="spec-item">
+                        <i class="fas fa-building"></i>
+                        <span>Thiết kế xây dựng từ 2 đến 3 tầng</span>
                     </div>
                 </div>
-                <button class="multi-arrow right"><i class="fas fa-chevron-right"></i></button>
-            </div>
-            
-            <div class="product-details">
-                <p>Diện tích: từ 100 – 250m2</p>
-                <p>Thiết kế xây dựng từ 2 đến 3 tầng</p>
             </div>
         </div>
     </section>
+
+    <!-- Add Splide CSS and JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+
+    <!-- Initialize Splide -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            new Splide('.productSplide', {
+                type: 'fade',
+                rewind: true,
+                autoplay: true,
+                interval: 5000,
+                pauseOnHover: true,
+                pauseOnFocus: true,
+                arrows: true,
+                pagination: false,
+                speed: 1000,
+                easing: 'cubic-bezier(0.25, 1, 0.5, 1)',
+                classes: {
+                    arrows: 'splide__arrows custom-arrows',
+                    arrow: 'splide__arrow custom-arrow',
+                    prev: 'splide__arrow--prev custom-prev',
+                    next: 'splide__arrow--next custom-next'
+                }
+            }).mount();
+        });
+    </script>
 
     <!-- Gallery Section -->
     <section id="gallery" class="gallery">
         <div class="container">
-            <h2>Thực tế hiện hữu – Dọn vào ở ngay</h2>
-            <div class="gallery-grid">
-                <!-- Gallery images will be loaded dynamically via JavaScript -->
+            <h2 class="section-title">Thực Tế Hiện Hữu<em>Dọn Vào Ở Ngay</em></h2>
+            
+            <!-- Swiper -->
+            <div class="swiper gallerySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="gallery-item" data-src="assets/album/1.png">
+                            <img src="assets/album/1.png" alt="Sun Casa Central - Hình ảnh 1">
+                            <div class="gallery-content">
+                                <h3>Không gian sống đẳng cấp</h3>
+                                <p>Thiết kế tối ưu, tận dụng tối đa ánh sáng tự nhiên</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="gallery-item" data-src="assets/album/2.png">
+                            <img src="assets/album/2.png" alt="Sun Casa Central - Hình ảnh 2">
+                            <div class="gallery-content">
+                                <h3>Tiện ích nội khu</h3>
+                                <p>Hồ bơi chuẩn Olympic, khu vui chơi trẻ em</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="gallery-item" data-src="assets/album/3.png">
+                            <img src="assets/album/3.png" alt="Sun Casa Central - Hình ảnh 3">
+                            <div class="gallery-content">
+                                <h3>Công viên trung tâm</h3>
+                                <p>Không gian xanh mát, đài phun nước nghệ thuật</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="gallery-item" data-src="assets/album/4.png">
+                            <img src="assets/album/4.png" alt="Sun Casa Central - Hình ảnh 4">
+                            <div class="gallery-content">
+                                <h3>Khu thương mại</h3>
+                                <p>Tổ hợp thương mại dịch vụ hiện đại</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="gallery-item" data-src="assets/album/5.png">
+                            <img src="assets/album/5.png" alt="Sun Casa Central - Hình ảnh 5">
+                            <div class="gallery-content">
+                                <h3>Hồ bơi resort</h3>
+                                <p>Hồ bơi vô cực với view toàn cảnh</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="gallery-item" data-src="assets/album/6.png">
+                            <img src="assets/album/6.png" alt="Sun Casa Central - Hình ảnh 6">
+                            <div class="gallery-content">
+                                <h3>Khu vui chơi</h3>
+                                <p>Khu vui chơi trẻ em an toàn, hiện đại</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+
+            <!-- Thumbnail Gallery -->
+            <div class="swiper galleryThumbs">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="assets/album/1.png" alt="Thumbnail 1">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/album/2.png" alt="Thumbnail 2">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/album/3.png" alt="Thumbnail 3">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/album/4.png" alt="Thumbnail 4">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/album/5.png" alt="Thumbnail 5">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/album/6.png" alt="Thumbnail 6">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lightbox -->
+        <div class="gallery-lightbox">
+            <div class="lightbox-content">
+                <img src="" alt="Lightbox Image">
+                <button class="lightbox-close"><i class="fas fa-times"></i></button>
+                <button class="lightbox-prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="lightbox-next"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
     </section>
 
+    <!-- Add Swiper JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper and Lightbox -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const galleryThumbs = new Swiper('.galleryThumbs', {
+                spaceBetween: 10,
+                slidesPerView: 'auto',
+                freeMode: true,
+                watchSlidesProgress: true,
+                breakpoints: {
+                    320: {
+                        slidesPerView: 3,
+                        spaceBetween: 8
+                    },
+                    768: {
+                        slidesPerView: 4,
+                        spaceBetween: 10
+                    },
+                    1024: {
+                        slidesPerView: 6,
+                        spaceBetween: 12
+                    }
+                }
+            });
+
+            const gallerySwiper = new Swiper('.gallerySwiper', {
+                effect: 'creative',
+                creativeEffect: {
+                    prev: {
+                        translate: ['-100%', 0, -1],
+                        opacity: 0
+                    },
+                    next: {
+                        translate: ['100%', 0, 0],
+                        opacity: 0
+                    },
+                },
+                speed: 1000,
+                spaceBetween: 30,
+                loop: true,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                thumbs: {
+                    swiper: galleryThumbs
+                }
+            });
+
+            // Lightbox functionality
+            const lightbox = document.querySelector('.gallery-lightbox');
+            const lightboxImg = lightbox.querySelector('img');
+            const lightboxClose = lightbox.querySelector('.lightbox-close');
+            const lightboxPrev = lightbox.querySelector('.lightbox-prev');
+            const lightboxNext = lightbox.querySelector('.lightbox-next');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            let currentIndex = 0;
+
+            function openLightbox(index) {
+                const src = galleryItems[index].dataset.src;
+                lightboxImg.src = src;
+                lightbox.classList.add('active');
+                currentIndex = index;
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            function showPrevImage() {
+                currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+                lightboxImg.src = galleryItems[currentIndex].dataset.src;
+            }
+
+            function showNextImage() {
+                currentIndex = (currentIndex + 1) % galleryItems.length;
+                lightboxImg.src = galleryItems[currentIndex].dataset.src;
+            }
+
+            // Event listeners
+            galleryItems.forEach((item, index) => {
+                item.addEventListener('click', () => openLightbox(index));
+            });
+
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightboxPrev.addEventListener('click', showPrevImage);
+            lightboxNext.addEventListener('click', showNextImage);
+
+            // Close on outside click
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+                
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') showPrevImage();
+                if (e.key === 'ArrowRight') showNextImage();
+            });
+
+            // Bank logos animation on scroll
+            const bankLogos = document.querySelectorAll('.bank-logos img');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Remove animate class first to reset animation
+                        bankLogos.forEach(logo => {
+                            logo.classList.remove('animate');
+                            // Force reflow
+                            void logo.offsetWidth;
+                            // Add animate class back
+                            logo.classList.add('animate');
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            const bankLogosContainer = document.querySelector('.bank-logos');
+            if (bankLogosContainer) {
+                observer.observe(bankLogosContainer);
+            }
+        });
+    </script>
+
     <!-- Policy Section -->
     <section id="policy" class="policy">
         <div class="container">
-            <h2>Đặc quyền thanh toán có 1 không 2</h2>
+            <h2 class="section-title">Đặc Quyền Thanh Toán<em>Có 1 Không 2</em></h2>
             <div class="policy-list">
                 <div class="policy-item">
                     <h3>1. Chỉ cần 30% thanh toán – nhận nhà ngay, sinh lời liền tay</h3>
@@ -236,13 +642,13 @@
                 </div>
             </div>
             <div class="bank-support">
-                <h3>Danh sách ngân hàng hỗ trợ:</h3>
+                <h3>Danh Sách Ngân Hàng Hỗ Trợ</h3>
                 <div class="bank-logos">
-                    <img src="images/vietcombank.png" alt="Vietcombank">
-                    <img src="images/bidv.png" alt="BIDV">
-                    <img src="images/vietinbank.png" alt="Vietinbank">
-                    <img src="images/publicbank.png" alt="Publicbank">
-                </div>
+                        <img src="assets/images/VCB.webp" alt="Vietcombank - Ngân hàng TMCP Ngoại thương Việt Nam">
+                        <img src="assets/images/BIDV.png" alt="BIDV - Ngân hàng TMCP Đầu tư và Phát triển Việt Nam">
+                        <img src="assets/images/VIETINBANK.svg" alt="VietinBank - Ngân hàng TMCP Công thương Việt Nam">
+                        <img src="assets/images/PublicBank.png" alt="Public Bank - Ngân hàng TMCP Đại Chúng Việt Nam">
+                    </div>
             </div>
         </div>
     </section>
@@ -304,6 +710,7 @@
             </div>
         </div>
     </section>
+    </div>
 
     <!-- Scripts -->
     <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY"></script>
@@ -311,5 +718,118 @@
 
     <!-- Up to Top Button -->
     <button id="toTopBtn" title="Lên đầu trang"><i class="fas fa-arrow-up"></i></button>
+
+    <script>
+        // Add loading class immediately
+        document.documentElement.classList.add('loading');
+
+        // Calculate initial viewport height
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+        // Function to handle page load
+        function handlePageLoad() {
+            // Remove loading class
+            document.documentElement.classList.remove('loading');
+            // Add loaded class to body
+            document.body.classList.add('loaded');
+            // Hide preloader
+            document.querySelector('.preloader').classList.add('fade-out');
+        }
+
+        // Wait for everything to load
+        window.addEventListener('load', function() {
+            // Small delay to ensure smooth transition
+            setTimeout(handlePageLoad, 100);
+        });
+
+        // Recalculate on resize
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                let vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+            }, 250);
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.mobile-header .hamburger');
+            const mobileNav = document.querySelector('.mobile-nav');
+            const mobileLinks = document.querySelectorAll('.mobile-nav a');
+
+            // Toggle mobile menu
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                mobileNav.classList.toggle('active');
+                document.body.classList.toggle('menu-open');
+            });
+
+            // Close menu when clicking links
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    mobileNav.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) {
+                    hamburger.classList.remove('active');
+                    mobileNav.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                }
+            });
+
+            // Amenities Tabs Functionality
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons and panes
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabPanes.forEach(pane => pane.classList.remove('active'));
+
+                    // Add active class to clicked button and corresponding pane
+                    button.classList.add('active');
+                    const tabId = button.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+        });
+    </script>
+
+    <!-- Section Title Animation Script -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const titles = document.querySelectorAll('.section-title');
+        const observerOptions = { threshold: 0.2 };
+        const animateOnScroll = (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('animated');
+            } else {
+              entry.target.classList.remove('animated');
+            }
+          });
+        };
+        const titleObserver = new IntersectionObserver(animateOnScroll, observerOptions);
+        titles.forEach(title => titleObserver.observe(title));
+      });
+    </script>
 </body>
 </html> 

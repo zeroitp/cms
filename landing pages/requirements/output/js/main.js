@@ -32,24 +32,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Gallery functionality
-function loadGallery() {
-    const galleryGrid = document.querySelector('.gallery-grid');
-    const imageCount = 13; // Number of images in the album folder
-
-    for (let i = 1; i <= imageCount; i++) {
-        const galleryItem = document.createElement('div');
-        galleryItem.className = 'gallery-item';
-        
-        const img = document.createElement('img');
-        img.src = `../album/${i}.png`;
-        img.alt = `Sun Casa Central Image ${i}`;
-        
-        galleryItem.appendChild(img);
-        galleryGrid.appendChild(galleryItem);
-    }
-}
-
 // Form validation
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('consultationForm');
@@ -99,9 +81,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         });
     });
 });
-
-// Load gallery when the page loads
-document.addEventListener('DOMContentLoaded', loadGallery);
 
 // Initialize map when the page loads
 document.addEventListener('DOMContentLoaded', initMap);
