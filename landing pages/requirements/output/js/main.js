@@ -212,4 +212,37 @@ window.addEventListener('DOMContentLoaded', function() {
     });
     window.addEventListener('resize', updateSlider);
     updateSlider();
-})(); 
+})();
+
+// Bank Logo Animation
+function initBankLogoAnimation() {
+    const bankLogos = document.querySelectorAll('.bank-logos img');
+    
+    // Add animation class to each logo with a delay
+    bankLogos.forEach((logo, index) => {
+        logo.style.animationDelay = `${index * 0.5}s`;
+    });
+
+    // Ensure animation continues even after page load
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = 'running';
+            } else {
+                entry.target.style.animationPlayState = 'paused';
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    bankLogos.forEach(logo => {
+        observer.observe(logo);
+    });
+}
+
+// Initialize bank logo animation when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initBankLogoAnimation();
+    // ... existing code ...
+}); 
