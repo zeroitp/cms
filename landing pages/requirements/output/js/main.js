@@ -175,45 +175,6 @@ window.addEventListener('DOMContentLoaded', function() {
     }
 })();
 
-// Product multi-slider JS
-(function() {
-    const track = document.querySelector('.multi-track');
-    const slides = document.querySelectorAll('.multi-slide');
-    const leftBtn = document.querySelector('.multi-arrow.left');
-    const rightBtn = document.querySelector('.multi-arrow.right');
-    let current = 0;
-    function getVisible() {
-        if (window.innerWidth > 1200) return 3;
-        if (window.innerWidth > 900) return 2;
-        return 1;
-    }
-    function updateSlider() {
-        const slideWidth = slides[0].offsetWidth + parseInt(getComputedStyle(track).gap || 32);
-        const visible = getVisible();
-        const maxCurrent = Math.max(0, slides.length - visible);
-        if (current > maxCurrent) current = maxCurrent;
-        track.style.transform = `translateX(${-current * slideWidth}px)`;
-    }
-    leftBtn.onclick = function() {
-        if (current > 0) current--;
-        updateSlider();
-    };
-    rightBtn.onclick = function() {
-        if (current < slides.length - getVisible()) current++;
-        updateSlider();
-    };
-    // Swipe support
-    let startX = 0;
-    track.addEventListener('touchstart', e => startX = e.touches[0].clientX);
-    track.addEventListener('touchend', e => {
-        let dx = e.changedTouches[0].clientX - startX;
-        if (dx > 40 && current > 0) { current--; updateSlider(); }
-        if (dx < -40 && current < slides.length - getVisible()) { current++; updateSlider(); }
-    });
-    window.addEventListener('resize', updateSlider);
-    updateSlider();
-})();
-
 // Bank Logo Animation
 function initBankLogoAnimation() {
     const bankLogos = document.querySelectorAll('.bank-logos img');
@@ -245,4 +206,135 @@ function initBankLogoAnimation() {
 document.addEventListener('DOMContentLoaded', function() {
     initBankLogoAnimation();
     // ... existing code ...
-}); 
+});
+
+// Gallery tab switching and Swiper init
+(function() {
+    const tabBtns = document.querySelectorAll('.gallery-tab-buttons .tab-btn');
+    const tabPanes = document.querySelectorAll('.gallery-tab-content .tab-pane');
+    let albumSwiper = null;
+    let albumSwiperInitialized = false;
+
+    function showTab(tabId) {
+        tabBtns.forEach(btn => btn.classList.remove('active'));
+        tabPanes.forEach(pane => pane.classList.remove('active'));
+        document.querySelector('.gallery-tab-buttons .tab-btn[data-tab="' + tabId + '"]').classList.add('active');
+        document.getElementById(tabId).classList.add('active');
+        if (tabId === 'gallery-album' && !albumSwiperInitialized) {
+            albumSwiper = new Swiper('.galleryAlbumSwiper', {
+                loop: true,
+                speed: 900,
+                spaceBetween: 30,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.galleryAlbumSwiper .swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.galleryAlbumSwiper .swiper-button-next',
+                    prevEl: '.galleryAlbumSwiper .swiper-button-prev',
+                },
+                effect: 'fade',
+                fadeEffect: { crossFade: true },
+            });
+            albumSwiperInitialized = true;
+        }
+    }
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            showTab(this.getAttribute('data-tab'));
+        });
+    });
+    // Auto-init album tab on load
+    if (document.getElementById('gallery-album')) {
+        showTab('gallery-album');
+    }
+})();
+
+// Lightbox mở rộng cho nhiều khu vực
+(function() {
+    document.addEventListener('DOMContentLoaded', function() {
+        // Lightbox elements
+        const lightbox = document.querySelector('.gallery-lightbox');
+        const lightboxImg = lightbox ? lightbox.querySelector('img') : null;
+        const lightboxClose = lightbox ? lightbox.querySelector('.lightbox-close') : null;
+        const lightboxPrev = lightbox ? lightbox.querySelector('.lightbox-prev') : null;
+        const lightboxNext = lightbox ? lightbox.querySelector('.lightbox-next') : null;
+        let currentIndex = 0;
+        let currentGroup = [];
+
+        // Helper: open lightbox with src, group
+        function openLightboxWithGroup(index, group) {
+            if (!lightboxImg) return;
+            currentGroup = group;
+            currentIndex = index;
+            lightboxImg.src = group[index].src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        function showPrevImage() {
+            if (!currentGroup.length) return;
+            currentIndex = (currentIndex - 1 + currentGroup.length) % currentGroup.length;
+            lightboxImg.src = currentGroup[currentIndex].src;
+        }
+        function showNextImage() {
+            if (!currentGroup.length) return;
+            currentIndex = (currentIndex + 1) % currentGroup.length;
+            lightboxImg.src = currentGroup[currentIndex].src;
+        }
+        // Event listeners for lightbox
+        if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+        if (lightboxPrev) lightboxPrev.addEventListener('click', showPrevImage);
+        if (lightboxNext) lightboxNext.addEventListener('click', showNextImage);
+        if (lightbox) lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') showPrevImage();
+            if (e.key === 'ArrowRight') showNextImage();
+        });
+
+        // 1. location-map
+        const locationMapImg = document.querySelector('.location-map img');
+        if (locationMapImg) {
+            locationMapImg.style.cursor = 'zoom-in';
+            locationMapImg.addEventListener('click', function() {
+                openLightboxWithGroup(0, [this]);
+            });
+        }
+        // 2. gallerySwiper (amenities)
+        const gallerySwiperImgs = Array.from(document.querySelectorAll('.gallerySwiper .gallery-item img'));
+        gallerySwiperImgs.forEach((img, idx) => {
+            img.style.cursor = 'zoom-in';
+            img.addEventListener('click', function(e) {
+                e.stopPropagation();
+                openLightboxWithGroup(idx, gallerySwiperImgs);
+            });
+        });
+        // 3. productSplide
+        const productSplideImgs = Array.from(document.querySelectorAll('.productSplide .splide__slide img'));
+        productSplideImgs.forEach((img, idx) => {
+            img.style.cursor = 'zoom-in';
+            img.addEventListener('click', function(e) {
+                e.stopPropagation();
+                openLightboxWithGroup(idx, productSplideImgs);
+            });
+        });
+        // 4. galleryAlbumSwiper
+        const galleryAlbumImgs = Array.from(document.querySelectorAll('.galleryAlbumSwiper .swiper-slide img'));
+        galleryAlbumImgs.forEach((img, idx) => {
+            img.style.cursor = 'zoom-in';
+            img.addEventListener('click', function(e) {
+                e.stopPropagation();
+                openLightboxWithGroup(idx, galleryAlbumImgs);
+            });
+        });
+    });
+})(); 
