@@ -885,13 +885,15 @@ section {
 
 .product-specs {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 40px;
     margin-bottom: 40px;
 }
 
 .spec-item {
     display: flex;
+    justify-content: left;
+    text-align: left;
     align-items: center;
     gap: 12px;
     padding: 16px 24px;
@@ -909,12 +911,17 @@ section {
 .spec-item i {
     font-size: 1.4rem;
     color: var(--primary-teal);
+    margin-left: 0;
+    margin-right: 10px;
+    min-width: 24px;
+    text-align: left;
 }
 
 .spec-item span {
     font-size: 1.1rem;
     color: var(--text-dark);
     font-weight: 500;
+    text-align: left;
 }
 
 .product-features {
@@ -936,7 +943,7 @@ section {
     
     .spec-item {
         width: 100%;
-        justify-content: center;
+        justify-content: left;
     }
     
     .product-overview p {
