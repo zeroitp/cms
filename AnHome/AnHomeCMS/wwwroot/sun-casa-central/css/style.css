@@ -60,6 +60,7 @@ html {
     -ms-overflow-style: none;
     height: 100%;
     scroll-behavior: smooth;
+    scroll-padding-top: 70px;
 }
 
 html::-webkit-scrollbar {
@@ -147,6 +148,10 @@ section {
     overflow: visible;
 }
 
+section:not(.banner) {
+    padding-top: 60px;
+}
+
 /* Header Styles */
 .header {
     position: fixed;
@@ -164,7 +169,7 @@ section {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    padding: 8px 0;
+    padding: 4px 0; /* Giảm padding từ 8px xuống 4px */
 }
 
 .header-content {
@@ -200,9 +205,9 @@ section {
 }
 
 .header.scrolled .logo img {
-    height: 80px !important;
-    max-width: 160px;
-    transition: none;
+    height: 60px !important; /* Giảm chiều cao logo từ 80px xuống 60px */
+    max-width: 120px; /* Giảm max-width từ 160px xuống 120px */
+    transition: all 0.3s ease;
 }
 
 .main-nav {
@@ -372,6 +377,12 @@ section {
         background: rgba(255,255,255,0.05);
         padding-left: 10px;
     }
+
+    .header.scrolled .mobile-header .logo-img img {
+        height: 60px !important;
+        max-width: 140px;
+        transition: all 0.3s ease;
+    }
 }
 
 @media (max-width: 576px) {
@@ -439,6 +450,7 @@ section {
     display: flex;
     flex-direction: column;
     background: linear-gradient(90deg, #f4fbff 0%, #e0f7fa 100%); /* Xanh dương nhạt */
+    scroll-margin-top: 70px;
 }
 
 .location .section-description {
@@ -626,6 +638,7 @@ section {
     width: 100%;
     overflow: hidden;
     margin-top: -1px;
+    scroll-margin-top: 70px;
 }
 
 .intro-text {
@@ -961,6 +974,7 @@ section {
     background: linear-gradient(90deg, #f7f6ff 0%, #ede7f6 100%); /* Tím nhạt */
     width: 100%;
     overflow: hidden;
+    scroll-margin-top: 70px;
 }
 
 .products .section-description {
@@ -1123,6 +1137,7 @@ section {
     background: linear-gradient(90deg, #f4fbff 0%, #e0f7fa 100%); /* Xanh dương nhạt */
     width: 100%;
     overflow: hidden;
+    scroll-margin-top: 70px;
 }
 
 .gallerySwiper {
@@ -1433,6 +1448,7 @@ section {
     background: linear-gradient(90deg, #f8fff4 0%, #eafbf2 100%); /* Xanh lá nhạt */
     width: 100%;
     overflow: hidden;
+    scroll-margin-top: 70px;
 }
 
 .policy-list {
@@ -2833,6 +2849,7 @@ body {
     color: var(--text-light);
     width: 100%;
     overflow: hidden;
+    scroll-margin-top: 70px;
 }
 
 .amenities .section-description {
@@ -4127,4 +4144,151 @@ p {
   margin-right: auto;
   text-align: center;
   word-break: break-word;
+}
+
+/* Điều chỉnh cho header desktop */
+@media (min-width: 993px) {
+    /* Header ban đầu */
+    .header {
+        padding: 8px 0; /* Giảm từ 15px xuống 8px */
+    }
+
+    /* Header khi scroll */
+    .header.scrolled {
+        padding: 2px 0; /* Giảm từ 4px xuống 2px */
+    }
+
+    /* Logo ban đầu */
+    .logo img {
+        height: 70px; /* Giảm từ 80px xuống 70px */
+        max-width: 140px; /* Giảm từ 160px xuống 140px */
+        transition: all 0.4s ease;
+    }
+
+    /* Logo khi scroll */
+    .header.scrolled .logo img {
+        height: 50px !important; /* Giảm từ 60px xuống 50px */
+        max-width: 100px; /* Giảm từ 120px xuống 100px */
+    }
+
+    /* Giảm padding cho nav items */
+    .main-nav a {
+        padding: 2px 0; /* Giảm từ 5px xuống 2px */
+    }
+
+    /* Đảm bảo các section không bị che khuất khi scroll */
+    .project-intro, .location, .policy, .amenities, .products, .gallery {
+        scroll-margin-top: 70px;
+    }
+
+    /* Điều chỉnh lại vị trí của section */
+    section:not(.banner) {
+        padding-top: 60px;
+    }
+
+    /* Điều chỉnh desktop header */
+    .desktop-header {
+        padding: 0 15px;
+    }
+
+    .desktop-header .logo img {
+        height: 70px !important;
+        max-width: 140px;
+    }
+
+    .header.scrolled .desktop-header .logo img {
+        height: 50px !important;
+        max-width: 100px;
+    }
+
+    /* Điều chỉnh container của logo */
+    .logo {
+        position: relative;
+        padding: 2px; /* Giảm padding để có thêm không gian cho logo lớn hơn */
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+    
+    /* Tăng kích thước logo ban đầu */
+    .logo img {
+        height: auto !important; /* Bỏ chiều cao cố định */
+        max-height: 65px !important; /* Thay vào đó sử dụng max-height */
+        max-width: 180px !important; /* Tăng max-width để logo rộng hơn */
+        width: auto;
+        object-fit: contain;
+        transform: scale(1.2); /* Phóng to logo thêm 20% */
+        transform-origin: left center; /* Đảm bảo logo phóng to từ bên trái */
+    }
+    
+    /* Logo khi scroll */
+    .header.scrolled .logo img {
+        max-height: 55px !important; /* Vẫn giữ to hơn so với trước */
+        max-width: 150px !important;
+        transform: scale(1.15); /* Vẫn giữ tỉ lệ phóng to khi scroll */
+    }
+    
+    /* Điều chỉnh vị trí logo */
+    .desktop-header .logo {
+        margin-right: 20px; /* Thêm khoảng cách giữa logo và menu */
+        z-index: 1001; /* Đảm bảo logo luôn hiển thị trên cùng */
+    }
+}
+
+/* Điều chỉnh logo cho mobile */
+@media (max-width: 992px) {
+    .logo-img img {
+        height: auto !important;
+        max-height: 55px !important;
+        max-width: 140px !important;
+        transform: scale(1.15);
+        transform-origin: center center;
+    }
+    
+    .header.scrolled .mobile-header .logo-img img {
+        max-height: 45px !important;
+        max-width: 120px !important;
+        transform: scale(1.1);
+    }
+}
+
+/* Logo lớn hơn cho desktop - ưu tiên cao */
+@media (min-width: 993px) {
+    /* Bỏ các giới hạn chiều cao cố định trước đây */
+    .desktop-header .logo img,
+    .header.scrolled .desktop-header .logo img {
+        height: auto !important;
+        transition: none !important;
+    }
+    
+    /* Cấu hình cụ thể cho logo khi không scroll */
+    .desktop-header .logo img {
+        max-height: 76px !important;
+        max-width: 190px !important;
+        transform: scale(1.3) !important;
+        transform-origin: left center !important;
+    }
+    
+    /* Cấu hình cụ thể cho logo khi scroll */
+    .header.scrolled .desktop-header .logo img {
+        max-height: 65px !important;
+        max-width: 170px !important;
+        transform: scale(1.25) !important;
+    }
+    
+    /* Điều chỉnh padding của container logo */
+    .desktop-header .logo {
+        padding: 0 !important;
+        margin-right: 30px !important;
+    }
+    
+    /* Giảm kích thước menu cho cân đối */
+    .desktop-header .main-nav a {
+        font-size: 1rem !important;
+    }
+    
+    /* Tăng khoảng cách giữa các mục menu */
+    .desktop-header .main-nav ul {
+        gap: 1.6rem !important;
+    }
 }
