@@ -30,6 +30,168 @@
         gtag('js', new Date());
         gtag('config', 'YOUR_GA_ID');
     </script>
+
+    <!-- Custom Popup Styles -->
+    <style>
+        /* Custom Popup Styles */
+        .custom-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .custom-popup.active {
+            display: flex;
+            opacity: 1;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .popup-content {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            transform: scale(0.7);
+            transition: transform 0.3s ease-in-out;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .custom-popup.active .popup-content {
+            transform: scale(1);
+        }
+
+        .popup-icon {
+            font-size: 48px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .popup-title {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .popup-message {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .popup-close-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .popup-close-btn:hover {
+            background: #45a049;
+        }
+
+        /* Error state styles */
+        .popup-content.error .popup-icon {
+            color: #f44336;
+        }
+
+        .popup-content.error .popup-close-btn {
+            background: #f44336;
+        }
+
+        .popup-content.error .popup-close-btn:hover {
+            background: #d32f2f;
+        }
+
+        /* Form Styles */
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            background-color: #fff;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
+        }
+
+        .form-group textarea::placeholder {
+            color: #999;
+        }
+
+        .form-group textarea:hover:not(:focus) {
+            border-color: #bbb;
+        }
+
+        /* Ensure consistent styling with other form inputs */
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            background-color: #fff;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
+        }
+
+        .form-group input::placeholder,
+        .form-group select::placeholder,
+        .form-group textarea::placeholder {
+            color: #999;
+        }
+
+        .form-group input:hover:not(:focus),
+        .form-group select:hover:not(:focus),
+        .form-group textarea:hover:not(:focus) {
+            border-color: #bbb;
+        }
+
+        /* Style for select dropdown */
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 15px;
+            padding-right: 40px;
+        }
+    </style>
 </head>
 <body>
     <!-- Preloader -->
@@ -711,6 +873,18 @@
 
     <!-- Contact & Footer Section -->
     <section class="contact-footer-section">
+        <!-- Custom Popup Notification -->
+        <div id="customPopup" class="custom-popup">
+            <div class="popup-content">
+                <div class="popup-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3 class="popup-title">Thông báo</h3>
+                <p class="popup-message"></p>
+                <button class="popup-close-btn">Đóng</button>
+            </div>
+        </div>
+
         <h2 class="section-title">
             SỞ HỮU SUN CASA CENTRAL
             <em>chỉ với <span class="price-highlight">1 - 1,5 tỷ đồng</span></em>
@@ -733,13 +907,16 @@
                         <input type="email" id="email" name="email" placeholder="Email" required>
                     </div>
                     <div class="form-group">
-                        <select id="interest" name="interest" required>
+                        <select id="interest" name="interest" required onchange="toggleAdditionalInfo()">
                             <option value="">Bạn cần tư vấn thông tin về</option>
-                            <option value="price">Bảng giá</option>
-                            <option value="location">Vị trí</option>
-                            <option value="payment">Chính sách thanh toán</option>
-                            <option value="other">Khác</option>
+                            <option value="Bảng giá">Bảng giá</option>
+                            <option value="Vị trí">Vị trí</option>
+                            <option value="Chính sách thanh toán">Chính sách thanh toán</option>
+                            <option value="Khác">Khác</option>
                         </select>
+                    </div>
+                    <div class="form-group" id="additionalInfoGroup" style="display:none;">
+                        <textarea id="additionalInfo" name="additionalInfo" placeholder="Vui lòng ghi rõ thông tin bạn cần tư vấn" rows="3"></textarea>
                     </div>
                     <input type="hidden" name="Message" id="message" value="Yêu cầu tư vấn">
                     <button type="submit" class="cta-button">ĐĂNG KÝ</button>
@@ -919,6 +1096,20 @@
                 });
             });
         });
+
+        function toggleAdditionalInfo() {
+            const interestSelect = document.getElementById('interest');
+            const additionalInfoGroup = document.getElementById('additionalInfoGroup');
+            const additionalInfo = document.getElementById('additionalInfo');
+            
+            if (interestSelect.value === "Khác") {
+                additionalInfoGroup.style.display = 'block';
+                additionalInfo.setAttribute('required', '');
+            } else {
+                additionalInfoGroup.style.display = 'none';
+                additionalInfo.removeAttribute('required');
+            }
+        }
     </script>
 
     <!-- Section Title Animation Script -->
@@ -940,4 +1131,4 @@
       });
     </script>
 </body>
-</html> 
+</html>

@@ -32,45 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Form validation
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('consultationForm');
-    
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form values
-        const name = document.getElementById('name').value;
-        const phone = document.getElementById('phone').value;
-        const email = document.getElementById('email').value;
-        const interest = document.getElementById('interest').value;
-        
-        // Basic validation
-        if (!name || !phone || !email || !interest) {
-            alert('Vui lòng điền đầy đủ thông tin');
-            return;
-        }
-        
-        // Phone number validation
-        const phoneRegex = /^[0-9]{10,11}$/;
-        if (!phoneRegex.test(phone)) {
-            alert('Số điện thoại không hợp lệ');
-            return;
-        }
-        
-        // Email validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            alert('Email không hợp lệ');
-            return;
-        }
-        
-        // If all validations pass, you can submit the form
-        // Here you would typically send the data to your server
-        alert('Cảm ơn bạn đã đăng ký! Chúng tôi sẽ liên hệ với bạn sớm nhất.');
-        form.reset();
-    });
-});
+// Form validation - Removed duplicate code, using the implementation at the end of file
 
 // Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -339,6 +301,36 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 })();
 
+// Add showPopup function at the top level
+function showPopup(message, isError = false) {
+    const popup = document.getElementById('customPopup');
+    const popupContent = popup.querySelector('.popup-content');
+    const popupMessage = popup.querySelector('.popup-message');
+    const popupIcon = popup.querySelector('.popup-icon i');
+    
+    // Set message and icon
+    popupMessage.textContent = message;
+    popupIcon.className = isError ? 'fas fa-times-circle' : 'fas fa-check-circle';
+    
+    // Add/remove error class
+    popupContent.classList.toggle('error', isError);
+    
+    // Show popup
+    popup.classList.add('active');
+    
+    // Close popup when clicking the close button
+    popup.querySelector('.popup-close-btn').onclick = function() {
+        popup.classList.remove('active');
+    };
+    
+    // Close popup when clicking outside
+    popup.onclick = function(e) {
+        if (e.target === popup) {
+            popup.classList.remove('active');
+        }
+    };
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('consultationForm');
     
@@ -350,46 +342,72 @@ document.addEventListener('DOMContentLoaded', function() {
             const phone = document.getElementById('phone').value;
             const email = document.getElementById('email').value;
             const interest = document.getElementById('interest').value;
+            const additionalInfo = document.getElementById('additionalInfo');
+            let message = 'Yêu cầu tư vấn';
+            
+            // Update message if "Khác" is selected
+            if (interest === "Khác" && additionalInfo && additionalInfo.value.trim() !== '') {
+                message += ": " + additionalInfo.value;
+            }
             
             // Basic validation
             if (!name || !phone || !email || !interest) {
-                alert('Vui lòng điền đầy đủ thông tin');
+                showPopup('Vui lòng điền đầy đủ thông tin', true);
                 return;
             }
             
             // Phone number validation
             const phoneRegex = /^[0-9]{10,11}$/;
             if (!phoneRegex.test(phone)) {
-                alert('Số điện thoại không hợp lệ');
+                showPopup('Số điện thoại không hợp lệ', true);
                 return;
             }
             
             // Email validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
-                alert('Email không hợp lệ');
+                showPopup('Email không hợp lệ', true);
                 return;
             }
 
-            // Submit form via AJAX
-            const formData = new FormData(form);
-            
+            // Create JSON object from form data
+            const jsonData = {
+                name: name,
+                phone: phone,
+                email: email,
+                interest: interest,
+                message: message
+            };
+
+            // Submit form via AJAX with JSON
             fetch(form.action, {
                 method: 'POST',
-                body: formData
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(jsonData)
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(data => {
                 if (data.success) {
-                    alert(data.message);
+                    showPopup('Cảm ơn bạn đã đăng ký! Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.');
                     form.reset();
+                    // Reset additional info field visibility
+                    if (additionalInfo) {
+                        additionalInfo.parentElement.style.display = 'none';
+                    }
                 } else {
-                    alert(data.message || 'Đã xảy ra lỗi. Vui lòng thử lại sau.');
+                    showPopup(data.message || 'Đã xảy ra lỗi. Vui lòng thử lại sau.', true);
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Đã xảy ra lỗi khi gửi form. Vui lòng thử lại sau.');
+                showPopup('Đã xảy ra lỗi khi gửi form. Vui lòng thử lại sau.', true);
             });
         });
     }

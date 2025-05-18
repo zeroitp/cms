@@ -8,11 +8,25 @@ builder.CreateUmbracoBuilder()
     .AddComposers()
     .Build();
 
+// Add CORS policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
 builder.Services.AddControllersWithViews();
 
 WebApplication app = builder.Build();
 
 await app.BootUmbracoAsync();
+
+// Enable CORS policy
+app.UseCors("AllowAll");
 
 // Thêm đoạn này để phục vụ trang tĩnh Sun Casa Central
 app.UseStaticFiles();
