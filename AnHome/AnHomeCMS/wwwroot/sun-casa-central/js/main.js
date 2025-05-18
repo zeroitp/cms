@@ -38,9 +38,24 @@ document.addEventListener('DOMContentLoaded', function() {
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+            // Close mobile menu if open
+            const mobileNav = document.querySelector('.mobile-nav');
+            const hamburger = document.querySelector('.hamburger');
+            if (mobileNav && mobileNav.classList.contains('active')) {
+                mobileNav.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+            
+            // Scroll to target
+            targetElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
     });
 });
 

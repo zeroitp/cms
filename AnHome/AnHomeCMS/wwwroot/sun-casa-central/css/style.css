@@ -2148,6 +2148,7 @@ a:hover {
     padding: 60px 0 0 0;
     width: 100%;
     overflow: hidden;
+    scroll-margin-top: 70px;
 }
 .contact-footer-grid {
     display: flex;
@@ -2164,6 +2165,7 @@ a:hover {
     max-width: 420px;
     flex: 1 1 380px;
     margin-bottom: 40px;
+    scroll-margin-top: 70px;
 }
 .contact-form-box h2 {
     color: var(--primary-teal);
