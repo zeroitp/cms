@@ -4,11 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sun Casa Central - Tâm điểm sống đẳng cấp giữa lòng VSIP II</title>
+    
+    <!-- Resource Hints -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    
     <link rel="icon" href="assets/logo/fav.ico" sizes="48x48">
     <meta name="description" content="Sun Casa Central - Khu đô thị kiểu mẫu đậm phong cách Singapore tại trung tâm VSIP II, Bình Dương">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Critical CSS inline -->
+    <style>
+        /* Critical CSS - Header, Banner, Loading */
+        html.loading,html.loading body{height:100%;overflow:hidden;position:fixed;width:100%}
+        .preloader{position:fixed;top:0;left:0;width:100vw;height:100vh;background:#fff;display:flex;justify-content:center;align-items:center;z-index:9999}
+        .header{position:fixed;top:0;left:0;width:100%;z-index:1000;transition:all 0.4s ease;background:transparent;padding:15px 0}
+        .banner{position:relative;height:100vh;width:100%;overflow:hidden;min-height:300px}
+        .banner-video{width:100%;height:100%;object-fit:cover;display:block}
+        /* Add other critical styles here */
+    </style>
+    
+    <!-- Non-critical CSS - Load async -->
+    <link rel="preload" href="css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/style.css"></noscript>
+    
+    <!-- Font loading optimization -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"></noscript>
 
     <!-- Facebook Pixel Code -->
     <script>
@@ -264,7 +287,12 @@
                 <div class="features-grid">
                     <div class="feature-item">
                         <div class="feature-image">
-                            <img src="assets/images/logo-vsip-300x300.webp" alt="Chủ đầu tư" loading="lazy">
+                            <img 
+                                data-src="assets/images/logo-vsip-300x300.webp" 
+                                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Crect width='300' height='300' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                                alt="Chủ đầu tư" 
+                                class="lazy-load"
+                                loading="lazy">
                         </div>
                         <h3>Chủ đầu tư</h3>
                         <p>VSIP – Liên doanh Singapore và Việt Nam</p>
@@ -272,7 +300,12 @@
 
                     <div class="feature-item">
                         <div class="feature-image">
-                            <img src="assets/images/quy-mo-300x300.webp" alt="Quy mô" loading="lazy">
+                            <img 
+                                data-src="assets/images/quy-mo-300x300.webp" 
+                                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Crect width='300' height='300' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                                alt="Quy mô" 
+                                class="lazy-load"
+                                loading="lazy">
                         </div>
                         <h3>Quy mô</h3>
                         <p>30 HA, tổng 879 sản phẩm, diện tích từ 100m² đến 250m²</p>
@@ -280,7 +313,12 @@
 
                     <div class="feature-item">
                         <div class="feature-image">
-                            <img src="assets/images/vsip-2-300x300.webp" alt="Vị trí" loading="lazy">
+                            <img 
+                                data-src="assets/images/vsip-2-300x300.webp" 
+                                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Crect width='300' height='300' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                                alt="Vị trí" 
+                                class="lazy-load"
+                                loading="lazy">
                         </div>
                         <h3>Vị trí</h3>
                         <p>Trung tâm khu công nghiệp VSIP II tại TP. Tân Uyên, Bình Dương</p>
@@ -288,7 +326,12 @@
 
                     <div class="feature-item">
                         <div class="feature-image">
-                            <img src="assets/images/so-do-300x300.webp" alt="Pháp lý" loading="lazy">
+                            <img 
+                                data-src="assets/images/so-do-300x300.webp" 
+                                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Crect width='300' height='300' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                                alt="Pháp lý" 
+                                class="lazy-load"
+                                loading="lazy">
                         </div>
                         <h3>Pháp lý</h3>
                         <p>Sổ hồng riêng, sở hữu lâu dài</p>
@@ -296,7 +339,12 @@
 
                     <div class="feature-item">
                         <div class="feature-image">
-                            <img src="assets/images/loai-hinh-300x300.webp" alt="Loại hình" loading="lazy">
+                            <img 
+                                data-src="assets/images/loai-hinh-300x300.webp" 
+                                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Crect width='300' height='300' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                                alt="Loại hình" 
+                                class="lazy-load"
+                                loading="lazy">
                         </div>
                         <h3>Loại hình</h3>
                         <p>Nhà phố, shophouse, biệt thự song lập, biệt thự đơn lập, shop villa</p>
@@ -335,7 +383,12 @@
             </div>
             <div class="location-right">
                 <div class="location-map">
-                    <img src="assets/vi-tri/vi-tri.jpg" alt="Vị trí dự án Sun Casa Central tại trung tâm TP. Bến Cát" loading="lazy">
+                    <img 
+                        data-src="assets/vi-tri/vi-tri.jpg" 
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                        alt="Vị trí dự án Sun Casa Central tại trung tâm TP. Bến Cát" 
+                        class="lazy-load"
+                        loading="lazy">
                 </div>
             </div>
         </div>
@@ -396,10 +449,30 @@
             <div class="bank-support">
                 <h3>Ngân Hàng Hỗ Trợ</h3>
                 <div class="bank-logos">
-                    <img src="assets/images/VCB.webp" alt="Vietcombank - Ngân hàng TMCP Ngoại thương Việt Nam" loading="lazy">
-                    <img src="assets/images/BIDV.png" alt="BIDV - Ngân hàng TMCP Đầu tư và Phát triển Việt Nam" loading="lazy">
-                    <img src="assets/images/VIETINBANK.svg" alt="VietinBank - Ngân hàng TMCP Công thương Việt Nam" loading="lazy">
-                    <img src="assets/images/PublicBank.png" alt="Public Bank - Ngân hàng TMCP Đại Chúng Việt Nam" loading="lazy">
+                    <img 
+                        data-src="assets/images/VCB.webp" 
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 60'%3E%3Crect width='120' height='60' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                        alt="Vietcombank - Ngân hàng TMCP Ngoại thương Việt Nam" 
+                        class="lazy-load"
+                        loading="lazy">
+                    <img 
+                        data-src="assets/images/BIDV.png" 
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 60'%3E%3Crect width='120' height='60' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                        alt="BIDV - Ngân hàng TMCP Đầu tư và Phát triển Việt Nam" 
+                        class="lazy-load"
+                        loading="lazy">
+                    <img 
+                        data-src="assets/images/VIETINBANK.svg" 
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 60'%3E%3Crect width='120' height='60' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                        alt="VietinBank - Ngân hàng TMCP Công thương Việt Nam" 
+                        class="lazy-load"
+                        loading="lazy">
+                    <img 
+                        data-src="assets/images/PublicBank.png" 
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 60'%3E%3Crect width='120' height='60' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                        alt="Public Bank - Ngân hàng TMCP Đại Chúng Việt Nam" 
+                        class="lazy-load"
+                        loading="lazy">
                 </div>
             </div>
             <div class="cta-below-bank">
@@ -418,8 +491,13 @@
             <div class="swiper gallerySwiper">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                        <div class="gallery-item" data-src="assets/tien-ich/cong-vien-phan-khu-an-khang.webp" loading="lazy">
-                            <img src="assets/tien-ich/cong-vien-phan-khu-an-khang.webp" alt="Công viên phân khu An Khang" loading="lazy">
+                        <div class="gallery-item" data-src="assets/tien-ich/cong-vien-phan-khu-an-khang.webp">
+                            <img 
+                                data-src="assets/tien-ich/cong-vien-phan-khu-an-khang.webp" 
+                                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                                alt="Công viên phân khu An Khang" 
+                                class="lazy-load"
+                                loading="lazy">
                             <div class="gallery-content">
                                 <h3>Công viên phân khu An Khang</h3>
                             </div>
@@ -612,27 +690,57 @@
                 <div class="splide__track">
                     <ul class="splide__list">
                         <li class="splide__slide">
-                            <img src="assets/loai-hinh/Nhà phố 2 tầng.webp" alt="Nhà Phố Liền Kề loại 1" loading="lazy">
+                            <img 
+                                data-src="assets/loai-hinh/Nhà phố 2 tầng.webp" 
+                                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                                alt="Nhà Phố Liền Kề loại 1" 
+                                class="lazy-load"
+                                loading="lazy">
                             <div class="slide-caption">Nhà Phố Liền Kề loại 1</div>
                         </li>
                         <li class="splide__slide">
-                            <img src="assets/loai-hinh/Nhà phố 3 tầng.webp" alt="Nhà Phố Liền Kề loại 2" loading="lazy">
+                            <img 
+                                data-src="assets/loai-hinh/Nhà phố 3 tầng.webp" 
+                                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                                alt="Nhà Phố Liền Kề loại 2" 
+                                class="lazy-load"
+                                loading="lazy">
                             <div class="slide-caption">Nhà Phố Liền Kề loại 2</div>
                         </li>
                         <li class="splide__slide">
-                            <img src="assets/loai-hinh/Shophouse.webp" alt="Shophouse" loading="lazy">
+                            <img 
+                                data-src="assets/loai-hinh/Shophouse.webp" 
+                                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                                alt="Shophouse" 
+                                class="lazy-load"
+                                loading="lazy">
                             <div class="slide-caption">Shophouse</div>
                         </li>
                         <li class="splide__slide">
-                            <img src="assets/loai-hinh/Shop Villa.webp" alt="Shop Villa" loading="lazy">
+                            <img 
+                                data-src="assets/loai-hinh/Shop Villa.webp" 
+                                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                                alt="Shop Villa" 
+                                class="lazy-load"
+                                loading="lazy">
                             <div class="slide-caption">Shop Villa</div>
                         </li>
                         <li class="splide__slide">
-                            <img src="assets/loai-hinh/Biệt thự đơn lập.webp" alt="Biệt Thự Đơn Lập" loading="lazy">
+                            <img 
+                                data-src="assets/loai-hinh/Biệt thự đơn lập.webp" 
+                                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                                alt="Biệt Thự Đơn Lập" 
+                                class="lazy-load"
+                                loading="lazy">
                             <div class="slide-caption">Biệt Thự Đơn Lập</div>
                         </li>
                         <li class="splide__slide">
-                            <img src="assets/loai-hinh/Biệt thự song lập.webp" alt="Biệt Thự Song Lập" loading="lazy">
+                            <img 
+                                data-src="assets/loai-hinh/Biệt thự song lập.webp" 
+                                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                                alt="Biệt Thự Song Lập" 
+                                class="lazy-load"
+                                loading="lazy">
                             <div class="slide-caption">Biệt Thự Song Lập</div>
                         </li>
                     </ul>
@@ -682,22 +790,134 @@
                     <div class="tab-pane active" id="gallery-album">
                         <div class="swiper galleryAlbumSwiper">
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide"><img src="assets/album/1.webp" alt="Album 1" loading="lazy"></div>
-                                <div class="swiper-slide"><img src="assets/album/2.webp" alt="Album 2" loading="lazy"></div>
-                                <div class="swiper-slide"><img src="assets/album/3.webp" alt="Album 3" loading="lazy"></div>
-                                <div class="swiper-slide"><img src="assets/album/4.webp" alt="Album 4" loading="lazy"></div>
-                                <div class="swiper-slide"><img src="assets/album/5.webp" alt="Album 5" loading="lazy"></div>
-                                <div class="swiper-slide"><img src="assets/album/6.webp" alt="Album 6" loading="lazy"></div>
-                                <div class="swiper-slide"><img src="assets/album/7.webp" alt="Album 7" loading="lazy"></div>
-                                <div class="swiper-slide"><img src="assets/album/8.webp" alt="Album 8" loading="lazy"></div>
-                                <div class="swiper-slide"><img src="assets/album/9.webp" alt="Album 9" loading="lazy"></div>
-                                <div class="swiper-slide"><img src="assets/album/10.webp" alt="Album 10" loading="lazy"></div>
-                                <div class="swiper-slide"><img src="assets/album/11.webp" alt="Album 11" loading="lazy"></div>
-                                <div class="swiper-slide"><img src="assets/album/12.webp" alt="Album 12" loading="lazy"></div>
-                                <div class="swiper-slide"><img src="assets/album/13.webp" alt="Album 13" loading="lazy"></div>
-                                <div class="swiper-slide"><img src="assets/album/14.webp" alt="Album 14" loading="lazy"></div>
-                                <div class="swiper-slide"><img src="assets/album/15.webp" alt="Album 15" loading="lazy"></div>
-                                <div class="swiper-slide"><img src="assets/album/16.webp" alt="Album 16" loading="lazy"></div>
+                                <div class="swiper-slide">
+                                    <img 
+                                        data-src="assets/album/1.webp" 
+                                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                                        alt="Album 1" 
+                                        class="lazy-load"
+                                        loading="lazy">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img 
+                                        data-src="assets/album/2.webp" 
+                                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                                        alt="Album 2" 
+                                        class="lazy-load"
+                                        loading="lazy">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img 
+                                        data-src="assets/album/3.webp" 
+                                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                                        alt="Album 3" 
+                                        class="lazy-load"
+                                        loading="lazy">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img 
+                                        data-src="assets/album/4.webp" 
+                                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                                        alt="Album 4" 
+                                        class="lazy-load"
+                                        loading="lazy">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img 
+                                        data-src="assets/album/5.webp" 
+                                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                                        alt="Album 5" 
+                                        class="lazy-load"
+                                        loading="lazy">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img 
+                                        data-src="assets/album/6.webp" 
+                                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                                        alt="Album 6" 
+                                        class="lazy-load"
+                                        loading="lazy">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img 
+                                        data-src="assets/album/7.webp" 
+                                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                                        alt="Album 7" 
+                                        class="lazy-load"
+                                        loading="lazy">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img 
+                                        data-src="assets/album/8.webp" 
+                                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                                        alt="Album 8" 
+                                        class="lazy-load"
+                                        loading="lazy">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img 
+                                        data-src="assets/album/9.webp" 
+                                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                                        alt="Album 9" 
+                                        class="lazy-load"
+                                        loading="lazy">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img 
+                                        data-src="assets/album/10.webp" 
+                                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                                        alt="Album 10" 
+                                        class="lazy-load"
+                                        loading="lazy">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img 
+                                        data-src="assets/album/11.webp" 
+                                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                                        alt="Album 11" 
+                                        class="lazy-load"
+                                        loading="lazy">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img 
+                                        data-src="assets/album/12.webp" 
+                                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                                        alt="Album 12" 
+                                        class="lazy-load"
+                                        loading="lazy">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img 
+                                        data-src="assets/album/13.webp" 
+                                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                                        alt="Album 13" 
+                                        class="lazy-load"
+                                        loading="lazy">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img 
+                                        data-src="assets/album/14.webp" 
+                                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                                        alt="Album 14" 
+                                        class="lazy-load"
+                                        loading="lazy">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img 
+                                        data-src="assets/album/15.webp" 
+                                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                                        alt="Album 15" 
+                                        class="lazy-load"
+                                        loading="lazy">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img 
+                                        data-src="assets/album/16.webp" 
+                                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f0f0f0'/%3E%3C/svg%3E"
+                                        alt="Album 16" 
+                                        class="lazy-load"
+                                        loading="lazy">
+                                </div>
                             </div>
                             <div class="swiper-pagination"></div>
                             <div class="swiper-button-next"></div>
@@ -952,9 +1172,37 @@
     </section>
     </div>
 
-    <!-- Scripts -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY"></script>
-    <script src="js/main.js"></script>
+    <!-- Analytics - async loading -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'YOUR_GA_ID');
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA_ID"></script>
+
+    <!-- Critical scripts inline -->
+    <script>
+        // Critical loading script inline
+        document.documentElement.classList.add('loading');
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+        
+        function handlePageLoad() {
+            document.documentElement.classList.remove('loading');
+            document.body.classList.add('loaded');
+            document.querySelector('.preloader').classList.add('fade-out');
+        }
+        
+        window.addEventListener('load', function() {
+            setTimeout(handlePageLoad, 100);
+        });
+    </script>
+
+    <!-- Non-critical scripts - defer -->
+    <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <script defer src="js/main.js"></script>
 
     <!-- Up to Top Button -->
     <button id="toTopBtn" title="Lên đầu trang"><i class="fas fa-arrow-up"></i></button>
@@ -973,30 +1221,10 @@
         THANH TOÁN 30% - NHẬN NHÀ NGAY
     </a>
 
+    <script defer src="js/lazy-load.js"></script>
+    <script defer src="js/main.js"></script>
+
     <script>
-        // Add loading class immediately
-        document.documentElement.classList.add('loading');
-
-        // Calculate initial viewport height
-        let vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
-
-        // Function to handle page load
-        function handlePageLoad() {
-            // Remove loading class
-            document.documentElement.classList.remove('loading');
-            // Add loaded class to body
-            document.body.classList.add('loaded');
-            // Hide preloader
-            document.querySelector('.preloader').classList.add('fade-out');
-        }
-
-        // Wait for everything to load
-        window.addEventListener('load', function() {
-            // Small delay to ensure smooth transition
-            setTimeout(handlePageLoad, 100);
-        });
-
         // Handle scroll events
         window.addEventListener('scroll', function() {
             const toTopBtn = document.getElementById('toTopBtn');
