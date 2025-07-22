@@ -1,3 +1,9 @@
+const EMAIL_CONFIG = {
+    SERVICE_ID: 'service_hx2gili', // Thay bằng Service ID từ EmailJS
+    TEMPLATE_ID: 'template_td0huf9', // Thay bằng Template ID từ EmailJS
+    PUBLIC_KEY: 'DewqM5WS2GEnc4QTY' // Thay bằng Public Key từ EmailJS
+};
+
 // Initialize Google Maps
 function initMap() {
     const sunCasaCentral = { lat: 11.0168, lng: 106.6864 }; // Coordinates for Sun Casa Central
@@ -347,6 +353,11 @@ function showPopup(message, isError = false) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize EmailJS
+    if (typeof emailjs !== 'undefined') {
+        emailjs.init(EMAIL_CONFIG.PUBLIC_KEY);
+    }
+    
     const form = document.getElementById('consultationForm');
     
     if (form) {
@@ -385,45 +396,49 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            // Create JSON object from form data
-            const jsonData = {
-                name: name,
+            // Check if EmailJS is available
+            if (typeof emailjs === 'undefined') {
+                showPopup('Dịch vụ email chưa sẵn sàng. Vui lòng thử lại sau.', true);
+                return;
+            }
+
+            // Show loading state
+            const submitBtn = form.querySelector('.cta-button');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Đang gửi...';
+            submitBtn.disabled = true;
+
+            // Prepare template parameters
+            const templateParams = {
+                from_name: name,
+                from_email: email,
                 phone: phone,
-                email: email,
                 interest: interest,
-                message: message
+                additional_info: additionalInfo ? additionalInfo.value : '',
+                message: message,
+                to_email: 'test.anhome@yopmail.com'
             };
 
-            // Submit form via AJAX with JSON
-            fetch(form.action, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(jsonData)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.success) {
+            // Send email using EmailJS
+            emailjs.send(EMAIL_CONFIG.SERVICE_ID, EMAIL_CONFIG.TEMPLATE_ID, templateParams)
+                .then(function(response) {
+                    console.log('Email sent successfully!', response.status, response.text);
                     showPopup('Cảm ơn bạn đã đăng ký! Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.');
                     form.reset();
                     // Reset additional info field visibility
                     if (additionalInfo) {
                         additionalInfo.parentElement.style.display = 'none';
                     }
-                } else {
-                    showPopup(data.message || 'Đã xảy ra lỗi. Vui lòng thử lại sau.', true);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                showPopup('Đã xảy ra lỗi khi gửi form. Vui lòng thử lại sau.', true);
-            });
+                })
+                .catch(function(error) {
+                    console.error('Email sending failed:', error);
+                    showPopup('Đã xảy ra lỗi khi gửi form. Vui lòng thử lại sau.', true);
+                })
+                .finally(function() {
+                    // Reset button state
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                });
         });
     }
 });
