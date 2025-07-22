@@ -1,0 +1,109 @@
+@using Umbraco.Cms.Web.Common.Views
+@using Umbraco.Cms.Core.Models.PublishedContent
+@inherits UmbracoViewPage
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+
+@{
+    var homePage = Model.AncestorOrSelf<ContentModels.Home>();
+}
+
+<!-- Footer -->
+<footer class="footer bg-light py-5">
+    <div class="container">
+        <div class="row">
+            <!-- VỀ AN HOMES -->
+            <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                <h5 class="text-uppercase">VỀ AN HOMES</h5>
+                <ul class="list-unstyled mb-0">
+                    <li><a href="@(homePage.Children.FirstOrDefault(x => x.ContentType.Alias == "aboutPage")?.Url() ?? "#")/lich-su-phat-trien">Lịch sử phát triển</a></li>
+                    <li><a href="@(homePage.Children.FirstOrDefault(x => x.ContentType.Alias == "aboutPage")?.Url() ?? "#")/tam-nhin-su-menh">Tầm nhìn - Sứ mệnh</a></li>
+                    <li><a href="@(homePage.Children.FirstOrDefault(x => x.ContentType.Alias == "aboutPage")?.Url() ?? "#")/ban-lanh-dao">Ban lãnh đạo</a></li>
+                    <li><a href="@(homePage.Children.FirstOrDefault(x => x.ContentType.Alias == "aboutPage")?.Url() ?? "#")/giai-thuong">Giải thưởng</a></li>
+                    <li><a href="@(homePage.Children.FirstOrDefault(x => x.ContentType.Alias == "aboutPage")?.Url() ?? "#")/doi-tac-chien-luoc">Đối tác chiến lược</a></li>
+                </ul>
+            </div>
+
+            <!-- LĨNH VỰC HOẠT ĐỘNG -->
+            <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                <h5 class="text-uppercase">LĨNH VỰC HOẠT ĐỘNG</h5>
+                <ul class="list-unstyled mb-0">
+                    <li><a href="@(homePage.Children.FirstOrDefault(x => x.ContentType.Alias == "servicesPage")?.Url() ?? "#")/phan-phoi-tiep-thi-du-an">Phân phối & tiếp thị dự án</a></li>
+                    <li><a href="@(homePage.Children.FirstOrDefault(x => x.ContentType.Alias == "servicesPage")?.Url() ?? "#")/kien-tao-cong-dong">Kiến tạo cộng đồng</a></li>
+                    <li><a href="@(homePage.Children.FirstOrDefault(x => x.ContentType.Alias == "servicesPage")?.Url() ?? "#")/tu-van-dau-tu">Tư vấn đầu tư</a></li>
+                    <li><a href="@(homePage.Children.FirstOrDefault(x => x.ContentType.Alias == "servicesPage")?.Url() ?? "#")/quan-ly-tai-san">Quản lý tài sản</a></li>
+                </ul>
+            </div>
+
+            <!-- DỰ ÁN -->
+            <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                <h5 class="text-uppercase">DỰ ÁN</h5>
+                <ul class="list-unstyled mb-0">
+                    <li><a href="@(homePage.Children.FirstOrDefault(x => x.ContentType.Alias == "projectPage")?.Url() ?? "#")/du-an-dang-phan-phoi">Dự án đang phân phối</a></li>
+                    <li><a href="@(homePage.Children.FirstOrDefault(x => x.ContentType.Alias == "projectPage")?.Url() ?? "#")/du-an-chuyen-nhuong">Dự án chuyển nhượng</a></li>
+                    <li><a href="@(homePage.Children.FirstOrDefault(x => x.ContentType.Alias == "projectPage")?.Url() ?? "#")/du-an-cac-chu-dau-tu">Dự án các Chủ đầu tư</a></li>
+                </ul>
+            </div>
+
+            <!-- CỘNG ĐỒNG -->
+            <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                <h5 class="text-uppercase">CỘNG ĐỒNG</h5>
+                <ul class="list-unstyled mb-0">
+                    <li><a href="@(homePage.Children.FirstOrDefault(x => x.ContentType.Alias == "communityPage")?.Url() ?? "#")/cong-dong-tieu-bieu">Cộng đồng tiêu biểu</a></li>
+                    <li><a href="@(homePage.Children.FirstOrDefault(x => x.ContentType.Alias == "communityPage")?.Url() ?? "#")/hoat-dong-dang-dien-ra">Hoạt động đang diễn ra</a></li>
+                    <li><a href="@(homePage.Children.FirstOrDefault(x => x.ContentType.Alias == "communityPage")?.Url() ?? "#")/goc-cu-dan">Góc cư dân</a></li>
+                </ul>
+            </div>
+
+            <!-- TIN TỨC - SỰ KIỆN -->
+            <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                <h5 class="text-uppercase">TIN TỨC - SỰ KIỆN</h5>
+                <ul class="list-unstyled mb-0">
+                    <li><a href="@(homePage.Children.FirstOrDefault(x => x.ContentType.Alias == "newsPage")?.Url() ?? "#")/tin-du-an">Tin dự án</a></li>
+                    <li><a href="@(homePage.Children.FirstOrDefault(x => x.ContentType.Alias == "newsPage")?.Url() ?? "#")/tin-cong-dong">Tin cộng đồng</a></li>
+                    <li><a href="@(homePage.Children.FirstOrDefault(x => x.ContentType.Alias == "newsPage")?.Url() ?? "#")/tin-noi-bo">Tin nội bộ</a></li>
+                    <li><a href="@(homePage.Children.FirstOrDefault(x => x.ContentType.Alias == "newsPage")?.Url() ?? "#")/hinh-anh-video">Hình ảnh & Video</a></li>
+                </ul>
+            </div>
+
+            <!-- LIÊN HỆ -->
+            <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                <h5 class="text-uppercase">LIÊN HỆ</h5>
+                <ul class="list-unstyled mb-0">
+                    <li><a href="@(homePage.Children.FirstOrDefault(x => x.ContentType.Alias == "contactPage")?.Url() ?? "#")">Thông tin liên hệ</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="d-flex align-items-center">
+                    <img src="/images/logo.png" alt="An Homes Logo" class="footer-logo me-3" />
+                    <p class="text-muted mb-0">Copyright © 2025 An Homes Group. All rights reserved.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex justify-content-md-end">
+                    <ul class="list-inline mb-0 social-icons">
+                        <li class="list-inline-item">
+                            <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" target="_blank"><i class="fas fa-envelope"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-12 text-center mt-3">
+                <p class="small text-muted mb-0">
+                    <a href="/privacy-policy">Privacy Policy</a> | <a href="/terms-and-conditions">Terms and Conditions</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>

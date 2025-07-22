@@ -1,0 +1,144 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.AboutPage>
+
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+@using AnHomeCMS.Models
+
+@{
+    Layout = "anhomeMaster.cshtml";
+    ViewData["Title"] = "Về An Homes";
+    ViewData["MetaDescription"] = Model.MetaDescription;
+    ViewData["MetaKeywords"] = Model.MetaKeywords;
+}
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('@(Model.BannerImage?.Url() ?? "/images/default-banner.jpg")')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>@Model.PageTitle</h1>
+                    @if (!string.IsNullOrEmpty(Model.Subtitle))
+                    {
+                        <span class="subheading">@Model.Subtitle</span>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Company Introduction -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="text-center mb-5">
+                    <h2 class="section-heading">Giới thiệu về An Homes</h2>
+                    <hr class="divider my-4" />
+                </div>
+                <div class="company-intro">
+                    @Html.Raw(Model.CompanyIntro)
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Vision & Mission -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="text-center mb-5">
+                    <h2 class="section-heading">Tầm nhìn - Sứ mệnh</h2>
+                    <hr class="divider my-4" />
+                </div>
+                <div class="vision-mission">
+                    @Html.Raw(Model.VisionMission)
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Leadership Team -->
+@if (Model.Leadership != null && Model.Leadership.Any())
+{
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-heading">Ban lãnh đạo</h2>
+                <hr class="divider my-4" />
+            </div>
+            <div class="row">
+                @foreach (var leader in Model.Leadership)
+                {
+                    <div class="col-lg-4 col-md-6 mb-5">
+                        <div class="leader-item text-center">
+                            <img class="rounded-circle mb-3" src="@(leader.Content.Value<IPublishedContent>("LeaderPhoto")?.Url() ?? "/images/default-avatar.jpg")" alt="@leader.Content.Value<string>("LeaderName")">
+                            <h5>@leader.Content.Value<string>("LeaderName")</h5>
+                            <p class="text-muted">@leader.Content.Value<string>("LeaderPosition")</p>
+                            <p>@leader.Content.Value<string>("LeaderDescription")</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+<!-- Awards & Recognition -->
+@if (Model.Awards != null && Model.Awards.Any())
+{
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-heading">Giải thưởng</h2>
+                <hr class="divider my-4" />
+            </div>
+            <div class="row">
+                @foreach (var award in Model.Awards)
+                {
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <img class="card-img-top" src="@(award.Content.Value<IPublishedContent>("AwardImage")?.Url() ?? "/images/default-award.jpg")" alt="@award.Content.Value<string>("AwardTitle")">
+                            <div class="card-body">
+                                <h5 class="card-title">@award.Content.Value<string>("AwardTitle")</h5>
+                                <p class="card-subtitle mb-2 text-muted">@award.Content.Value<string>("AwardYear")</p>
+                                <p class="card-text">@award.Content.Value<string>("AwardDescription")</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+<!-- Strategic Partners -->
+@if (Model.Partners != null && Model.Partners.Any())
+{
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-heading">Đối tác chiến lược</h2>
+                <hr class="divider my-4" />
+            </div>
+            <div class="row">
+                @foreach (var partner in Model.Partners)
+                {
+                    <div class="col-md-3 col-sm-4 mb-4">
+                        <div class="partner-item text-center">
+                            <img src="@(partner.Content.Value<IPublishedContent>("PartnerLogo")?.Url() ?? "/images/default-partner.png")" alt="@partner.Content.Value<string>("PartnerName")" class="img-fluid mb-3">
+                            <h5>@partner.Content.Value<string>("PartnerName")</h5>
+                            @if (!string.IsNullOrEmpty(partner.Content.Value<string>("PartnerDescription")))
+                            {
+                                <p class="text-muted">@partner.Content.Value<string>("PartnerDescription")</p>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}

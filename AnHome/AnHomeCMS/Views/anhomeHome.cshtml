@@ -1,0 +1,275 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Home>
+
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+@using AnHomeCMS.Models
+
+@{
+    Layout = "anhomeMaster.cshtml";
+}
+
+<!-- Hero Video Section -->
+<header class="masthead" style="background-image: url('@(Model.BannerImage?.Url() ?? "/images/default-banner.jpg")')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>@Model.PageTitle</h1>
+                    @if (!string.IsNullOrEmpty(Model.Subtitle))
+                    {
+                        <span class="subheading">@Model.Subtitle</span>
+                    }
+                    @if (Model.IntroVideo != null)
+                    {
+                        <div class="mt-4">
+                            <button class="btn btn-primary video-btn" data-bs-toggle="modal" data-bs-target="#videoModal" data-src="@Model.IntroVideo.Url()">
+                                <i class="fas fa-play me-2"></i>Xem video giới thiệu
+                            </button>
+                        </div>
+
+                        <!-- Video Modal -->
+                        <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="videoModalLabel">An Homes - Giới thiệu</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="ratio ratio-16x9">
+                                            <iframe src="" title="Video giới thiệu An Homes" allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Company Info Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="text-center mb-5">
+                    <h2 class="section-heading">Về An Homes</h2>
+                    <hr class="divider my-4" />
+                </div>
+                <div class="company-info">
+                    @Html.Raw(Model.CompanyInfo)
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Projects Section -->
+@if (Model.FeaturedProjects != null && Model.FeaturedProjects.Any())
+{
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-heading">Dự án đang phân phối</h2>
+                <hr class="divider my-4" />
+            </div>
+            <div class="row">
+                @foreach (var project in Model.FeaturedProjects.Take(4))
+                {
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="card h-100">
+                            <img class="card-img-top" src="@(project.Value<IPublishedContent>("ProjectImage")?.Url() ?? "/images/default-project.jpg")" alt="@project.Value<string>("ProjectName")">
+                            <div class="card-body">
+                                <h4 class="card-title">@project.Value<string>("ProjectName")</h4>
+                                <p class="card-text">
+                                    <i class="fas fa-map-marker-alt me-2"></i>@project.Value<string>("Location")
+                                </p>
+                                <p class="card-text">@project.Value<string>("Price")</p>
+                                <p class="card-text text-truncate">@project.Value<string>("Summary")</p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="@project.Url()" class="btn btn-primary">Xem chi tiết</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="text-center mt-4">
+                <a href="@(Model.Children.FirstOrDefault(x => x.ContentType.Alias == "projectPage")?.Url() ?? "#")" class="btn btn-outline-primary">Xem tất cả</a>
+            </div>
+        </div>
+    </section>
+}
+
+<!-- Transfer Projects Section -->
+@if (Model.TransferProjects != null && Model.TransferProjects.Any())
+{
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-heading">Dự án chuyển nhượng</h2>
+                <hr class="divider my-4" />
+                <p class="text-muted">Hiển thị 2-3 dự án chuyển nhượng có ưu đãi đặc biệt</p>
+            </div>
+            <div class="row">
+                @foreach (var project in Model.TransferProjects.Take(3))
+                {
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-badge">Chuyển nhượng</div>
+                            <img class="card-img-top" src="@(project.Value<IPublishedContent>("ProjectImage")?.Url() ?? "/images/default-project.jpg")" alt="@project.Value<string>("ProjectName")">
+                            <div class="card-body">
+                                <h4 class="card-title">@project.Value<string>("ProjectName")</h4>
+                                <p class="card-text">
+                                    <i class="fas fa-map-marker-alt me-2"></i>@project.Value<string>("Location")
+                                </p>
+                                <p class="card-text">@project.Value<string>("Price")</p>
+                                <p class="card-text text-truncate">@project.Value<string>("Summary")</p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="@project.Url()" class="btn btn-primary">Xem chi tiết</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="text-center mt-4">
+                <a href="@(Model.Children.FirstOrDefault(x => x.ContentType.Alias == "projectPage")?.Url() ?? "#")/du-an-chuyen-nhuong" class="btn btn-outline-primary">Xem tất cả</a>
+            </div>
+        </div>
+    </section>
+}
+
+<!-- Community Activities Section -->
+@if (Model.CommunityActivities != null && Model.CommunityActivities.Any())
+{
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-heading">Hoạt động Kiến tạo Cộng đồng</h2>
+                <hr class="divider my-4" />
+            </div>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div id="communityCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            @{
+                                var isFirst = true;
+                                foreach (var item in Model.CommunityActivities)
+                                {
+                                    <div class="carousel-item @(isFirst ? "active" : "")">
+                                        <img src="@(item.Content.Value<IPublishedContent>("ActivityImage")?.Url() ?? "/images/default-activity.jpg")" class="d-block w-100" alt="@item.Content.Value<string>("ActivityTitle")">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5>@item.Content.Value<string>("ActivityTitle")</h5>
+                                            <p>@item.Content.Value<string>("ActivityDescription")</p>
+                                        </div>
+                                    </div>
+                                    isFirst = false;
+                                }
+                            }
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#communityCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#communityCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="@(Model.Children.FirstOrDefault(x => x.ContentType.Alias == "communityPage")?.Url() ?? "#")" class="btn btn-outline-primary">Xem tất cả</a>
+            </div>
+        </div>
+    </section>
+}
+
+<!-- Latest News Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-heading">Tin tức - Sự kiện</h2>
+            <hr class="divider my-4" />
+        </div>
+        <div class="row">
+            @{
+                var newsPage = Model.Children.FirstOrDefault(x => x.ContentType.Alias == "newsPage");
+                var latestNews = newsPage?.Value<IEnumerable<IPublishedContent>>("ProjectNews")?.Take(3).ToList();
+                
+                if (latestNews != null && latestNews.Any())
+                {
+                    foreach (var news in latestNews)
+                    {
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <img class="card-img-top" src="@(news.Value<IPublishedContent>("NewsImage")?.Url() ?? "/images/default-news.jpg")" alt="@news.Value<string>("NewsTitle")">
+                                <div class="card-body">
+                                    <h5 class="card-title">@news.Value<string>("NewsTitle")</h5>
+                                    <p class="card-subtitle mb-2 text-muted">
+                                        <i class="far fa-calendar-alt me-2"></i>@news.Value<DateTime>("PublishDate").ToString("dd/MM/yyyy")
+                                    </p>
+                                    <p class="card-text text-truncate">@news.Value<string>("Summary")</p>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="@news.Url()" class="btn btn-link">Đọc tiếp <i class="fas fa-arrow-right ms-1"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="col-12 text-center">
+                        <p>Chưa có tin tức nào.</p>
+                    </div>
+                }
+            }
+        </div>
+        <div class="text-center mt-4">
+            <a href="@(newsPage?.Url() ?? "#")" class="btn btn-outline-primary">Xem tất cả</a>
+        </div>
+    </div>
+</section>
+
+<!-- Partners Section -->
+@if (Model.Partners != null && Model.Partners.Any())
+{
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-heading">Đối tác chiến lược</h2>
+                <hr class="divider my-4" />
+            </div>
+            <div class="row">
+                @foreach (var partner in Model.Partners)
+                {
+                    <div class="col-md-2 col-sm-4 col-6 mb-4">
+                        <div class="partner-item text-center">
+                            <img src="@(partner.Content.Value<IPublishedContent>("PartnerLogo")?.Url() ?? "/images/default-partner.png")" alt="@partner.Content.Value<string>("PartnerName")" class="img-fluid">
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+@section Scripts {
+    <script>
+        // Video modal functionality
+        $(document).ready(function() {
+            $('.video-btn').click(function() {
+                var videoSrc = $(this).data("src");
+                $("#videoModal iframe").attr('src', videoSrc + "?autoplay=1&modestbranding=1&showinfo=0");
+            });
+
+            $('#videoModal').on('hidden.bs.modal', function() {
+                $("#videoModal iframe").attr('src', '');
+            });
+        });
+    </script>
+}

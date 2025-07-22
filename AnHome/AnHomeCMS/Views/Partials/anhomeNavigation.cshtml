@@ -1,0 +1,40 @@
+@inherits UmbracoViewPage
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+
+@{
+    var homePage = Model.AncestorOrSelf<ContentModels.Home>();
+}
+
+<nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="@homePage.Url()">
+            <img src="/images/logo.png" alt="An Homes Logo" class="logo-img" />
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link px-lg-3 py-3 py-lg-4" href="@(homePage.Children.FirstOrDefault(x => x.ContentType.Alias == "aboutPage")?.Url() ?? "#")">VỀ AN HOMES</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-lg-3 py-3 py-lg-4" href="@(homePage.Children.FirstOrDefault(x => x.ContentType.Alias == "servicesPage")?.Url() ?? "#")">LĨNH VỰC HOẠT ĐỘNG</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-lg-3 py-3 py-lg-4" href="@(homePage.Children.FirstOrDefault(x => x.ContentType.Alias == "projectPage")?.Url() ?? "#")">DỰ ÁN</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-lg-3 py-3 py-lg-4" href="@(homePage.Children.FirstOrDefault(x => x.ContentType.Alias == "communityPage")?.Url() ?? "#")">CỘNG ĐỒNG</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-lg-3 py-3 py-lg-4" href="@(homePage.Children.FirstOrDefault(x => x.ContentType.Alias == "newsPage")?.Url() ?? "#")">TIN TỨC - SỰ KIỆN</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-lg-3 py-3 py-lg-4" href="@(homePage.Children.FirstOrDefault(x => x.ContentType.Alias == "contactPage")?.Url() ?? "#")">LIÊN HỆ</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

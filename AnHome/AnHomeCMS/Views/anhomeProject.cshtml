@@ -1,0 +1,277 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<AnHomeCMS.Models.ProjectPage>
+
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+@using AnHomeCMS.Models
+
+@{
+    Layout = "anhomeMaster.cshtml";
+    ViewData["Title"] = "Dự án - An Homes";
+    ViewData["MetaDescription"] = Model.MetaDescription;
+    ViewData["MetaKeywords"] = Model.MetaKeywords;
+}
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('@(Model.BannerImage?.Url() ?? "/images/default-banner.jpg")')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>@Model.PageTitle</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Filter Section -->
+<section class="py-4 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="filter-container p-3">
+                    <form id="projectFilterForm" class="row g-3 align-items-end">
+                        <div class="col-md-3">
+                            <label for="regionFilter" class="form-label">Khu vực</label>
+                            <select id="regionFilter" class="form-select">
+                                <option value="">Tất cả khu vực</option>
+                                <option value="hanoi">Hà Nội</option>
+                                <option value="hcm">TP. Hồ Chí Minh</option>
+                                <option value="danang">Đà Nẵng</option>
+                                <option value="nhatrang">Nha Trang</option>
+                                <option value="other">Khác</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col-md-3">
+                            <label for="typeFilter" class="form-label">Loại hình BĐS</label>
+                            <select id="typeFilter" class="form-select">
+                                <option value="">Tất cả loại hình</option>
+                                <option value="apartment">Căn hộ chung cư</option>
+                                <option value="villa">Biệt thự</option>
+                                <option value="townhouse">Nhà phố</option>
+                                <option value="land">Đất nền</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col-md-3">
+                            <label for="investorFilter" class="form-label">Chủ đầu tư</label>
+                            <select id="investorFilter" class="form-select">
+                                <option value="">Tất cả chủ đầu tư</option>
+                                <!-- Dynamic options from InvestorProjects -->
+                                @if (Model.InvestorProjects != null)
+                                {
+                                    foreach (var investor in Model.InvestorProjects)
+                                    {
+                                        <option value="@investor.Content.Value<string>("InvestorId")">@investor.Content.Value<string>("InvestorName")</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-primary w-100">Tìm kiếm</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Active Projects Section -->
+@if (Model.ActiveProjects != null && Model.ActiveProjects.Any())
+{
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-heading">Dự án đang phân phối</h2>
+                <hr class="divider my-4" />
+                <p class="text-muted">Hiển thị 4-6 dự án có ưu đãi đặc biệt, hình ảnh chất lượng cao</p>
+            </div>
+            <div class="row project-list">
+                @foreach (var project in Model.ActiveProjects)
+                {
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card h-100 project-card">
+                            <div class="position-relative">
+                                <img class="card-img-top" src="@(project.Value<IPublishedContent>("ProjectImage")?.Url() ?? "/images/default-project.jpg")" alt="@project.Value<string>("ProjectName")">
+                                <div class="project-status active">Đang phân phối</div>
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">@project.Value<string>("ProjectName")</h4>
+                                <p class="card-text location">
+                                    <i class="fas fa-map-marker-alt me-2"></i>@project.Value<string>("Location")
+                                </p>
+                                <p class="card-text price fw-bold">@project.Value<string>("Price")</p>
+                                <p class="card-text description">@project.Value<string>("Summary")</p>
+                            </div>
+                            <div class="card-footer bg-white">
+                                <a href="@project.Url()" class="btn btn-primary">Xem chi tiết</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+<!-- Transfer Projects Section -->
+@if (Model.TransferProjects != null && Model.TransferProjects.Any())
+{
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-heading">Dự án chuyển nhượng</h2>
+                <hr class="divider my-4" />
+                <p class="text-muted">Hiển thị 4-6 sản phẩm có ưu đãi/chiết khấu đặc biệt</p>
+            </div>
+            <div class="row project-list">
+                @foreach (var project in Model.TransferProjects)
+                {
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card h-100 project-card">
+                            <div class="position-relative">
+                                <img class="card-img-top" src="@(project.Value<IPublishedContent>("ProjectImage")?.Url() ?? "/images/default-project.jpg")" alt="@project.Value<string>("ProjectName")">
+                                <div class="project-status transfer">Chuyển nhượng</div>
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">@project.Value<string>("ProjectName")</h4>
+                                <p class="card-text location">
+                                    <i class="fas fa-map-marker-alt me-2"></i>@project.Value<string>("Location")
+                                </p>
+                                <p class="card-text price fw-bold">@project.Value<string>("Price")</p>
+                                <p class="card-text description">@project.Value<string>("Summary")</p>
+                                @if (!string.IsNullOrEmpty(project.Value<string>("Discount")))
+                                {
+                                    <div class="discount-badge">
+                                        <span>@project.Value<string>("Discount")</span>
+                                    </div>
+                                }
+                            </div>
+                            <div class="card-footer bg-white">
+                                <a href="@project.Url()" class="btn btn-primary">Xem chi tiết</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+<!-- Investor Projects Section -->
+@if (Model.InvestorProjects != null && Model.InvestorProjects.Any())
+{
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-heading">Dự án theo chủ đầu tư</h2>
+                <hr class="divider my-4" />
+            </div>
+            <div class="row">
+                @foreach (var investor in Model.InvestorProjects.Take(4))
+                {
+                    <div class="col-md-3 mb-4">
+                        <div class="investor-card text-center">
+                            <img src="@(investor.Content.Value<IPublishedContent>("InvestorLogo")?.Url() ?? "/images/default-investor.png")" alt="@investor.Content.Value<string>("InvestorName")" class="img-fluid mb-3">
+                            <h5>@investor.Content.Value<string>("InvestorName")</h5>
+                            <p class="text-muted small mb-3">@investor.Content.Value<string>("InvestorDescription")</p>
+                            <a href="@investor.Content.Value<string>("InvestorProjectsUrl")" class="btn btn-sm btn-outline-primary">Xem dự án</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+<!-- Project Map Section -->
+@if (Model.ProjectMap != null)
+{
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-heading">Bản đồ dự án</h2>
+                <hr class="divider my-4" />
+                <p class="text-muted">Các dự án An Homes đang phân phối trên Việt Nam</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="project-map">
+                        @Html.Raw(Model.ProjectMap.Value("MapHtml"))
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+<!-- Call to Action Section -->
+@if (!string.IsNullOrEmpty(Model.CallToAction))
+{
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-xl-6">
+                    <div class="cta-box text-center p-5 bg-primary text-white rounded shadow">
+                        <h3 class="mb-4">Bạn muốn sinh lời 10%/năm từ BĐS?</h3>
+                        <p class="mb-4">Nhận ngay danh sách dự án TIỀM NĂNG nhất – Kèm phân tích ROI từ Chuyên gia!</p>
+                        <form class="cta-form">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Họ và tên" required>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="tel" class="form-control" placeholder="Số điện thoại" required>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="email" class="form-control" placeholder="Email" required>
+                            </div>
+                            <button type="submit" class="btn btn-light btn-lg w-100">Nhận tư vấn ngay</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('#projectFilterForm').on('submit', function(e) {
+                e.preventDefault();
+                
+                // Get filter values
+                var region = $('#regionFilter').val();
+                var propertyType = $('#typeFilter').val();
+                var investor = $('#investorFilter').val();
+                
+                // Filter projects based on selection
+                filterProjects(region, propertyType, investor);
+            });
+            
+            function filterProjects(region, propertyType, investor) {
+                // This would typically be an AJAX call to filter projects server-side
+                // For demonstration, we'll just add a loading state
+                $('.project-list').addClass('loading');
+                
+                setTimeout(function() {
+                    // Remove loading state after filtering would complete
+                    $('.project-list').removeClass('loading');
+                    
+                    // Show filter results message
+                    var filterMessage = 'Kết quả tìm kiếm: ';
+                    if (region) filterMessage += 'Khu vực: ' + $('#regionFilter option:selected').text() + ' | ';
+                    if (propertyType) filterMessage += 'Loại hình: ' + $('#typeFilter option:selected').text() + ' | ';
+                    if (investor) filterMessage += 'Chủ đầu tư: ' + $('#investorFilter option:selected').text();
+                    
+                    // Display message
+                    $('.filter-results-message').remove();
+                    $('.project-list').before('<div class="filter-results-message alert alert-info">' + filterMessage + '</div>');
+                    
+                }, 500);
+            }
+        });
+    </script>
+}
