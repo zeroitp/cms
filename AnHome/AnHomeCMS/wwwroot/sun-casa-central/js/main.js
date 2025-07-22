@@ -416,7 +416,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 interest: interest,
                 additional_info: additionalInfo ? additionalInfo.value : '',
                 message: message,
-                to_email: 'test.anhome@yopmail.com'
+                to_email: 'anhomesbinhduong.vn@gmail.com'
             };
 
             // Send email using EmailJS
